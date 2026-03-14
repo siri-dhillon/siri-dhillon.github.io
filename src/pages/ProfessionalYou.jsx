@@ -101,7 +101,7 @@ export default function ProfessionalYou() {
              <div className="bg-slate-900 p-4 rounded-[40px] border border-slate-800 relative">
                 
                 <img 
-                  src="/pushover-proof.jpeg" 
+                  src="/images/pushover-proof.jpeg" 
                   alt="Pushover Proof" 
                   className="rounded-[32px] w-full max-w-xs shadow-2xl"
                 />
