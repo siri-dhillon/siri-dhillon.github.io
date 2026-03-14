@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. Reset and Modern Defaults */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Forces the browser and scrollbars to respect dark mode */
+  color-scheme: dark;
+  
+  /* Ensures smooth scrolling to sections */
+  scroll-behavior: smooth;
+}
+
+/* 2. Global Body Styling */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  /* Removes the Flexbox centering from the default Vite template */
+  display: block; 
+  /* Sets your core theme colors */
+  @apply bg-slate-950 text-slate-200 antialiased overflow-x-hidden;
+}
+
+/* 3. Typography & UI Fixes */
+h1, h2, h3, h4, h5, h6 {
+  @apply text-white tracking-tight;
+}
+
+/* Ensures the Iframe container behaves on mobile */
+iframe {
+  @apply w-full border-none rounded-2xl;
+}
+
+/* Smooth transitions for all your buttons and links */
+a, button {
+  @apply transition-all duration-200;
+}
+
+/* 4. Selection Highlight Color */
+::selection {
+  @apply bg-blue-500/30 text-white;
+}
