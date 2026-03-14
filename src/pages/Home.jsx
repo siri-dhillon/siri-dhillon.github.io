@@ -23,7 +23,7 @@ export default function Home() {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-25"></div>
             <img 
-              src="/headshot.jpg" 
+              src="/images/headshot.jpg" 
               alt="Sirpreet Dhillon" 
               className="relative rounded-full w-48 h-48 object-cover border-2 border-slate-800 shadow-2xl"
             />
