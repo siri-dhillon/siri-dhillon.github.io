@@ -2,12 +2,12 @@
   "name": "Sirpreet Dhillon",
   "monogram": "SD",
   "headline": "Systems & AI engineer building LLM applications, data pipelines, and ML that runs at the edge.",
-  "intro": "I take AI and software projects from idea to production: retrieval-augmented assistants, multi-agent systems, full-stack apps, data pipelines, and, most recently, radar processing for TPUs in orbit.",
+  "intro": "I take AI and software projects from idea to production: retrieval-augmented assistants, multi-agent systems, full-stack apps, data pipelines, and, most recently, radar processing for Trillium TPUs in orbit.",
   "location": "Washington, DC–Baltimore area · Open to remote",
   "availability": "Open to AI / forward deployed engineer roles and select freelance projects",
   "bio": [
     "I'm Sirpreet (Siri) Dhillon, a systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University. Since 2019 I've worked independently, designing and shipping software and AI solutions for small businesses and individual clients, from requirements through production.",
-    "My background runs from hardware to the cloud. I've designed bio-amplifier circuits in an SFU research lab, built FPGA graphics cores, automated testing at Ford, and engineered medical-imaging pipelines in the FAISAL lab. Today I build LLM applications and agents, and I'm developing a SAR processing pipeline designed to run on TPUs aboard satellites.",
+    "My background runs from hardware to the cloud. I've designed bio-amplifier circuits in an SFU research lab, built FPGA graphics cores, automated testing at Ford, and engineered medical-imaging pipelines in the FAISAL lab. Today I build LLM applications and agents, and I'm developing a SAR processing pipeline designed to run on Trillium TPUs aboard satellites.",
     "I work best embedded with a team: understanding the real problem, building the thing, and staying until it works in production."
   ],
   "photo": "/images/headshot-480.jpg",
@@ -27,18 +27,18 @@
   },
   "currentWork": {
     "eyebrow": "Current work",
-    "title": "SAR processing on edge TPUs, in orbit",
-    "summary": "Radar satellites spend most of their downlink budget sending raw synthetic-aperture radar data to the ground, where it waits hours to be processed. I'm building an open pipeline that focuses and analyzes the raw radar signal onboard, on a TPU, so the satellite sends back answers instead of raw data.",
+    "title": "SAR processing on Trillium TPUs, in orbit",
+    "summary": "Radar satellites spend most of their downlink budget sending raw synthetic-aperture radar data to the ground, where it waits hours to be processed. I'm building an open pipeline that focuses and analyzes the raw radar signal onboard, on a Google Trillium TPU, so the satellite sends back answers instead of raw data.",
     "points": [
       "NumPy range-Doppler reference (range compression, RCMC, azimuth compression) that matches theory: 2.65 m measured vs 2.66 m expected range resolution",
-      "JAX port of the focusing chain for TPU execution, exportable as an onboard artifact",
+      "JAX port of the focusing chain for Trillium TPU execution, exportable as an onboard artifact",
       "Real-world foundations: a Sentinel-1 scene over Galveston Bay with precise orbits and AIS ship tracks for maritime detection"
     ],
     "stack": [
       "Python",
       "NumPy",
       "JAX",
-      "TPU",
+      "Trillium TPU",
       "Sentinel-1",
       "Signal processing"
     ],
@@ -98,7 +98,7 @@
       "items": [
         "C / C++",
         "SAR signal processing",
-        "TPUs",
+        "Trillium TPUs",
         "VHDL & FPGA (Zynq)",
         "ns-3",
         "ROS",

@@ -1,15 +1,15 @@
 ---
-title: Orbital SAR processing on TPUs
+title: Orbital SAR processing on Trillium TPUs
 slug: orbital-sar-tpu
-summary: An open SAR processing stack built to run on a TPU in orbit, taking in raw radar echoes and sending out small, prioritized alerts.
+summary: An open SAR processing stack built to run on a Google Trillium TPU in orbit, taking in raw radar echoes and sending out small, prioritized alerts.
 industry: space & Earth observation (independent R&D)
 category: Systems/Edge
 year: 2026
 role: Sole engineer
 problem: Synthetic-aperture radar satellites collect far more raw data than they can downlink. Focusing and analysis happen on the ground, hours after capture, which is too slow for time-critical uses like maritime monitoring.
-solution: A Python SAR pipeline designed to run onboard. A NumPy range-Doppler reference (range compression, RCMC, azimuth compression) is the ground truth, a JAX port targets TPU hardware, and a point-target simulator with quality metrics serves as the test oracle. Real-data foundations are in place too, with a Sentinel-1C stripmap scene over Galveston Bay, precise orbits, and NOAA AIS ship tracks for later detection and fusion.
+solution: A Python SAR pipeline designed to run onboard. A NumPy range-Doppler reference (range compression, RCMC, azimuth compression) is the ground truth, a JAX port targets Trillium TPU hardware, and a point-target simulator with quality metrics serves as the test oracle. Real-data foundations are in place too, with a Sentinel-1C stripmap scene over Galveston Bay, precise orbits, and NOAA AIS ship tracks for later detection and fusion.
 stack: [Python, NumPy, JAX, Sentinel-1, AIS, pytest, uv, GitHub Actions]
-outcome: Focused synthetic targets match theory. Range resolution measured 2.65 m against a theoretical 2.66 m, with −13.5 dB range PSLR, and quality is identical at near, mid, and far range. Next steps are focusing real Level-0 data, benchmarking CPU vs TPU, and ship detection.
+outcome: Focused synthetic targets match theory. Range resolution measured 2.65 m against a theoretical 2.66 m, with −13.5 dB range PSLR, and quality is identical at near, mid, and far range. Next steps are focusing real Level-0 data, benchmarking CPU vs Trillium TPU, and ship detection.
 featured: true
 order: 1
 confidential: false
@@ -35,6 +35,6 @@ well onto matrix hardware like TPUs.
 
 ## Roadmap
 
-Real Sentinel-1 Level-0 focusing validated against ESA's SLC → IW/TOPS mode → CPU vs TPU
+Real Sentinel-1 Level-0 focusing validated against ESA's SLC → IW/TOPS mode → CPU vs Trillium TPU
 benchmark → maritime detection with AIS fusion → mission simulator (orbits, ground stations,
 time-to-alert) → onboard artifact.
