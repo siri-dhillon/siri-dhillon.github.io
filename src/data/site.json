@@ -1,0 +1,58 @@
+{
+  "name": "Sirpreet Dhillon",
+  "monogram": "SD",
+  "headline": "AI engineer who ships production LLM, data, and edge-ML systems end to end.",
+  "intro": "PLACEHOLDER — I design, build, and deploy AI-powered software for teams that need it to work in the real world: from RAG assistants and data pipelines to ML running on satellites.",
+  "location": "PLACEHOLDER — City, Country · Remote-friendly",
+  "availability": "Open to AI / forward deployed engineer roles and select freelance projects",
+  "bio": [
+    "PLACEHOLDER — I'm a software and AI engineer with a BASc in Computer Engineering from Simon Fraser University. Since 2019 I've worked independently with companies to turn messy problems into reliable systems: LLM assistants grounded in their own data, analytics pipelines, and cloud architectures that don't fall over.",
+    "PLACEHOLDER — My background spans hardware and software: bio-amplifier and fNIRS work in an SFU engineering lab, medical imaging pipelines in a cancer research lab, and test automation at Ford. Today I'm focused on running ML directly on edge TPUs aboard satellites."
+  ],
+  "photo": "/images/headshot-480.jpg",
+  "photoAlt": "Portrait of Sirpreet Dhillon",
+  "email": "",
+  "resumeUrl": "/resume.pdf",
+  "bookingUrl": "",
+  "socials": {
+    "github": "https://github.com/siri-dhillon",
+    "linkedin": "https://www.linkedin.com/in/sirpreet",
+    "huggingface": "https://huggingface.co/Sirpreet"
+  },
+  "seo": {
+    "title": "Sirpreet Dhillon — AI & Software Engineer",
+    "description": "Portfolio and services of Sirpreet Dhillon, an AI engineer building LLM applications, full-stack products, data pipelines, cloud architecture, and edge ML.",
+    "ogImage": "/og-default.png"
+  },
+  "currentWork": {
+    "eyebrow": "Current work",
+    "title": "Onboard SAR processing on edge TPUs",
+    "summary": "Satellites spend most of their downlink budget sending raw synthetic-aperture radar data to the ground. I'm building a pipeline that turns the raw radar signal into ML answers onboard, so the satellite sends back the result, not the raw data.",
+    "points": [
+      "PLACEHOLDER — Raw SAR signal → focused image formation tuned for constrained hardware",
+      "PLACEHOLDER — Quantized models compiled for edge TPUs, running inference in orbit",
+      "PLACEHOLDER — Downlink shrinks from gigabytes of raw data to compact detections and metadata"
+    ],
+    "stack": ["Python", "TensorFlow Lite", "Edge TPU", "NumPy", "Signal processing"],
+    "status": "In progress"
+  },
+  "skills": [
+    { "group": "AI & LLM", "items": ["RAG", "LangChain", "OpenAI / Claude APIs", "Agents & tool use", "Vector DBs (Chroma, pgvector)", "Evaluation", "PyTorch", "TensorFlow / TFLite"] },
+    { "group": "Full-stack", "items": ["TypeScript", "React", "Astro", "Node.js", "Python", "FastAPI", "REST & GraphQL"] },
+    { "group": "Data", "items": ["SQL", "ETL pipelines", "Pandas", "DICOM / medical imaging", "Data quality & validation", "Dashboards"] },
+    { "group": "Cloud & DevOps", "items": ["AWS (certified)", "Serverless", "Docker", "CI/CD (GitHub Actions)", "Infrastructure as code"] },
+    { "group": "Systems & Edge", "items": ["C / C++", "Edge TPU", "ROS", "Embedded Linux", "Signal processing", "Bash"] }
+  ],
+  "contact": {
+    "heading": "Let's build something useful",
+    "intro": "Hiring for an AI or forward deployed engineering role, or have a project in mind? Tell me a bit about it and I'll reply within two business days.",
+    "form": {
+      "provider": "formspree",
+      "endpoint": "https://formspree.io/f/YOUR_FORM_ID",
+      "honeypotField": "_gotcha",
+      "projectTypes": ["AI / LLM solution", "Full-stack application", "Data & analytics", "Cloud / solutions architecture", "Full-time role", "Something else"],
+      "budgets": ["Under $5k", "$5k – $15k", "$15k – $40k", "$40k+", "Not sure yet", "N/A (job opportunity)"],
+      "timelines": ["ASAP", "Within a month", "1–3 months", "Flexible"]
+    }
+  }
+}

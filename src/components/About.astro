@@ -1,0 +1,26 @@
+---
+import { site } from '@/lib/site';
+import { href } from '@/lib/paths';
+import { publicFileExists } from '@/lib/content';
+import SectionHeading from './SectionHeading.astro';
+const hasPhoto = publicFileExists(site.photo);
+---
+<section id="about" class="section border-t border-line" aria-labelledby="about-title">
+  <div class="container-page grid items-start gap-12 md:grid-cols-[minmax(0,280px)_1fr]">
+    {hasPhoto ? (
+      <img src={href(site.photo)} alt={site.photoAlt} width="480" height="640" loading="lazy" decoding="async"
+        class="aspect-[3/4] w-full max-w-[280px] rounded-2xl border border-line object-cover" />
+    ) : (
+      <div class="grid aspect-[3/4] w-full max-w-[280px] place-items-center rounded-2xl border border-dashed border-line bg-surface text-sm text-muted">
+        Photo placeholder
+      </div>
+    )}
+    <div>
+      <SectionHeading id="about-title" eyebrow="About" title="A bit about me" />
+      <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-muted">
+        {site.bio.map((p) => <p>{p}</p>)}
+      </div>
+      {site.location && <p class="mt-6 text-sm text-muted">{site.location}</p>}
+    </div>
+  </div>
+</section>

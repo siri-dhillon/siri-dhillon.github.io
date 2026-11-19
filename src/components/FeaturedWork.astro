@@ -1,0 +1,20 @@
+---
+import { getFeaturedProjects } from '@/lib/content';
+import { href } from '@/lib/paths';
+import SectionHeading from './SectionHeading.astro';
+import ProjectCard from './ProjectCard.astro';
+import Icon from './Icon.astro';
+const projects = await getFeaturedProjects();
+---
+<section id="work" class="section border-t border-line" aria-labelledby="work-title">
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <SectionHeading id="work-title" eyebrow="Selected work" title="Case studies"
+        lead="Problem, what I built, the stack, and the result. Client names are withheld; industries are described generally." />
+      <a href={href('/work/')} class="btn-secondary">All projects <Icon name="arrowRight" class="h-4 w-4" /></a>
+    </div>
+    <ul class="mt-12 grid gap-6 lg:grid-cols-2">
+      {projects.map((p) => <li><ProjectCard project={p} variant="featured" /></li>)}
+    </ul>
+  </div>
+</section>

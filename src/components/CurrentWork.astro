@@ -1,0 +1,39 @@
+---
+import { site } from '@/lib/site';
+import Icon from './Icon.astro';
+const cw = site.currentWork;
+const flow = ['Raw radar signal', 'Onboard processing', 'ML on edge TPU', 'Answers downlinked'];
+---
+<section id="current" class="section border-t border-line bg-surface/50" aria-labelledby="current-title">
+  <div class="container-page grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
+    <div>
+      <p class="eyebrow flex items-center gap-2">
+        {cw.eyebrow}
+        {cw.status && <span class="rounded-full bg-accent-soft px-2 py-0.5 text-[0.7rem] normal-case tracking-normal">{cw.status}</span>}
+      </p>
+      <h2 id="current-title" class="h2">{cw.title}</h2>
+      <p class="lead">{cw.summary}</p>
+      <ul class="mt-8 space-y-3">
+        {cw.points.map((pt) => (
+          <li class="flex gap-3 text-muted"><Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-accent" />{pt}</li>
+        ))}
+      </ul>
+      <ul class="mt-8 flex flex-wrap gap-2" aria-label="Tech stack">{cw.stack.map((s) => <li class="chip">{s}</li>)}</ul>
+    </div>
+
+    <figure class="card bg-bg">
+      <figcaption class="flex items-center gap-2 text-sm font-semibold text-ink">
+        <Icon name="satellite" class="h-5 w-5 text-accent" /> From raw data to answers, in orbit
+      </figcaption>
+      <ol class="mt-6 space-y-3">
+        {flow.map((step, i) => (
+          <li class="flex items-center gap-4">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line bg-surface text-sm font-semibold text-accent">{i + 1}</span>
+            <span class="flex-1 rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-ink">{step}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="mt-6 text-sm text-muted">Instead of downlinking gigabytes of raw signal, the satellite sends compact results.</p>
+    </figure>
+  </div>
+</section>

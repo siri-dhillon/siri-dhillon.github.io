@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens. Every color pair below meets WCAG AA (4.5:1) for body text. */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f7fa;
+  --surface-2: #eef1f6;
+  --border: #dfe3ea;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #4338ca;
+  --accent-hover: #3730a3;
+  --accent-soft: #eef0ff;
+  --accent-fg: #ffffff;
+  --ring: #6366f1;
+  color-scheme: light;
+}
+.dark {
+  --bg: #0a0e17;
+  --surface: #111827;
+  --surface-2: #172033;
+  --border: #253046;
+  --text: #e8ebf2;
+  --muted: #a3adbf;
+  --accent: #a5b4fc;
+  --accent-hover: #c7d2fe;
+  --accent-soft: #1b2142;
+  --accent-fg: #0a0e17;
+  --ring: #a5b4fc;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection { background: var(--accent-soft); color: var(--text); }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .section { @apply py-20 sm:py-28; }
+  .eyebrow { @apply text-sm font-semibold uppercase tracking-[0.14em] text-accent; }
+  .h2 { @apply mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl; }
+  .lead { @apply mt-4 max-w-2xl text-lg leading-relaxed text-muted; }
+  .card { @apply rounded-2xl border border-line bg-surface p-6 sm:p-7; }
+  .chip { @apply inline-flex items-center rounded-full border border-line bg-bg px-3 py-1 text-xs font-medium text-muted; }
+  .btn-primary, .btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-colors; }
+  .btn-primary { @apply bg-accent text-accent-fg hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-accent; }
+  .btn-secondary { @apply border border-line bg-bg text-ink hover:bg-surface-2; }
+  .link, .prose-content a { @apply font-medium text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent; }
+  .field { @apply mt-2 block w-full rounded-xl border border-line bg-bg px-4 py-3 text-ink placeholder:text-muted/80 focus:border-accent focus:outline-none focus:ring-2 focus:ring-ring/40; }
+  .label { @apply block text-sm font-medium text-ink; }
+
+  /* Long-form Markdown (case-study "deep dive") */
+  .prose-content { @apply max-w-none text-[1.0625rem] leading-relaxed text-muted; }
+  .prose-content > * + * { @apply mt-5; }
+  .prose-content h2 { @apply mt-12 text-2xl font-bold tracking-tight text-ink; }
+  .prose-content h3 { @apply mt-8 text-xl font-semibold text-ink; }
+  .prose-content strong { @apply font-semibold text-ink; }
+  .prose-content ul { @apply list-disc space-y-2 pl-6; }
+  .prose-content ol { @apply list-decimal space-y-2 pl-6; }
+  .prose-content code { @apply rounded-md bg-surface-2 px-1.5 py-0.5 font-mono text-[0.9em] text-ink; }
+  .prose-content pre { @apply overflow-x-auto rounded-xl border border-line p-4 text-sm; }
+  .prose-content pre code { @apply bg-transparent p-0; }
+  .prose-content img { @apply mx-auto max-h-[36rem] w-auto rounded-2xl border border-line; }
+  .prose-content blockquote { @apply border-l-4 border-accent pl-4 italic; }
+}

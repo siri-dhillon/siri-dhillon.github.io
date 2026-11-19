@@ -1,0 +1,15 @@
+---
+import { site } from '@/lib/site';
+import { href } from '@/lib/paths';
+import SocialLinks from './SocialLinks.astro';
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-line">
+  <div class="container-page flex flex-col items-start justify-between gap-6 py-10 sm:flex-row sm:items-center">
+    <div>
+      <p class="font-semibold text-ink">{site.name}</p>
+      <p class="mt-1 text-sm text-muted">© {year} · Built with Astro · <a class="link" href={href('/work/')}>All work</a></p>
+    </div>
+    <SocialLinks />
+  </div>
+</footer>

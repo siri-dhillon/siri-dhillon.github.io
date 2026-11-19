@@ -1,0 +1,77 @@
+---
+import { site } from '@/lib/site';
+import { href } from '@/lib/paths';
+import ThemeToggle from './ThemeToggle.astro';
+import Icon from './Icon.astro';
+
+const nav = [
+  { label: 'Work', to: '/work/' },
+  { label: 'Services', to: '/#services' },
+  { label: 'Experience', to: '/#experience' },
+  { label: 'About', to: '/#about' },
+  { label: 'Contact', to: '/#contact' },
+];
+const path = Astro.url.pathname;
+const isActive = (to: string) => !to.includes('#') && path.startsWith(href(to));
+---
+<header class="sticky top-0 z-50 border-b border-line/70 bg-bg/85 backdrop-blur supports-[backdrop-filter]:bg-bg/70">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href={href('/')} class="flex items-center gap-3 rounded-lg font-semibold tracking-tight text-ink">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-accent text-sm font-bold text-accent-fg" aria-hidden="true">{site.monogram}</span>
+      <span>{site.name}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden md:block">
+      <ul class="flex items-center gap-1 text-sm font-medium">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={href(item.to)}
+              class:list={['rounded-lg px-3 py-2 transition-colors hover:bg-surface-2 hover:text-ink', isActive(item.to) ? 'text-ink' : 'text-muted']}
+              aria-current={isActive(item.to) ? 'page' : undefined}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <a href={href('/#contact')} class="btn-primary hidden !py-2.5 sm:inline-flex">Work with me</a>
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line text-ink md:hidden"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        data-menu-button
+      >
+        <span class="sr-only">Open menu</span>
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line bg-bg md:hidden" data-menu>
+    <ul class="container-page flex flex-col py-3 text-base font-medium">
+      {nav.map((item) => (
+        <li><a href={href(item.to)} class="block rounded-lg px-2 py-3 text-ink hover:bg-surface-2">{item.label}</a></li>
+      ))}
+      <li class="pt-2"><a href={href('/#contact')} class="btn-primary w-full">Work with me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+  if (btn && menu) {
+    const label = btn.querySelector('.sr-only');
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      if (label) label.textContent = open ? 'Close menu' : 'Open menu';
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) set(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { set(false); btn.focus(); } });
+  }
+</script>

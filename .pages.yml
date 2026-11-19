@@ -1,0 +1,258 @@
+# Pages CMS configuration — https://pagescms.org
+# Sign in at https://app.pagescms.org with GitHub, open this repo, and edit
+# content from any browser or phone. Every save is a commit to main, which
+# triggers the deploy workflow. Fields mirror src/content.config.ts.
+
+media:
+  - name: images
+    label: Images
+    input: public/images
+    output: /images
+    rename: safe
+    extensions: [png, jpg, jpeg, webp, avif, gif, svg]
+  - name: files
+    label: Files (resume, PDFs)
+    input: public
+    output: /
+    categories: [document]
+
+settings:
+  content:
+    merge: true # keep YAML keys the CMS doesn't know about
+
+content:
+  # ───────────────────────── Projects ─────────────────────────
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    exclude: [README.md]
+    view:
+      primary: title
+      fields: [title, category, year, featured, order]
+      sort: [order, year, title]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: slug
+        label: URL slug
+        description: "lowercase-with-dashes. Becomes /work/<slug>/ and the filename."
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: "Use lowercase letters, numbers, and single dashes"
+      - name: summary
+        label: One-line summary
+        type: string
+        required: true
+        options: { maxlength: 160 }
+      - name: industry
+        label: Industry (anonymized)
+        description: 'e.g. "professional services firm". Never the client name.'
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values: [AI/LLM, Full-stack, Data, Cloud/Architecture, Systems/Edge]
+      - name: year
+        label: Year
+        type: number
+        required: true
+        options: { min: 2000, max: 2100 }
+      - name: role
+        label: My role
+        type: string
+        required: true
+      - name: problem
+        label: Problem
+        type: text
+        required: true
+      - name: solution
+        label: What I built
+        type: text
+        required: true
+      - name: stack
+        label: Stack
+        type: string
+        list: { min: 1 }
+        required: true
+      - name: outcome
+        label: Result / outcome
+        type: text
+        required: true
+      - name: featured
+        label: Feature on homepage
+        type: boolean
+        default: false
+      - name: order
+        label: Sort order (lower = first)
+        type: number
+        default: 100
+      - name: confidential
+        label: Confidential (hides links and cover image)
+        type: boolean
+        default: true
+      - name: draft
+        label: Draft (hidden from the live site)
+        type: boolean
+        default: false
+      - name: cover
+        label: Cover image (optional)
+        type: image
+        options:
+          media: images
+          path: public/images/projects
+      - name: coverAlt
+        label: Cover image alt text
+        description: Required if a cover image is set.
+        type: string
+      - name: links
+        label: Links (optional, hidden when confidential)
+        type: object
+        fields:
+          - name: repo
+            label: Repository URL
+            type: string
+          - name: demo
+            label: Live demo URL
+            type: string
+      - name: body
+        label: Case study deep dive (optional)
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          path: public/images/projects
+
+  # ───────────────────────── Services ─────────────────────────
+  - name: services
+    label: Services
+    type: collection
+    path: src/content/services
+    format: yaml-frontmatter
+    filename: "{fields.title}.md"
+    view:
+      fields: [title, order]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - name: icon
+        label: Icon
+        type: select
+        required: true
+        options: { values: [sparkles, code, chart, cloud, chip] }
+      - { name: summary, label: Summary, type: text, required: true }
+      - { name: deliverables, label: Deliverables, type: string, list: { min: 1 }, required: true }
+      - { name: order, label: Sort order, type: number, default: 100 }
+
+  # ──────────────────────── Experience ────────────────────────
+  - name: experience
+    label: Experience
+    type: collection
+    path: src/content/experience
+    format: yaml-frontmatter
+    filename: "{fields.org}-{fields.role}.md"
+    view:
+      primary: role
+      fields: [role, org, start, end, order]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: role, label: Role / title, type: string, required: true }
+      - { name: org, label: Organization, type: string, required: true }
+      - { name: location, label: Location, type: string }
+      - name: start
+        label: Start (YYYY-MM)
+        type: string
+        required: true
+        pattern: { regex: "^\\d{4}-(0[1-9]|1[0-2])$", message: "Use YYYY-MM" }
+      - name: end
+        label: End (YYYY-MM or "present")
+        type: string
+        required: true
+        pattern: { regex: "^(\\d{4}-(0[1-9]|1[0-2])|present)$", message: 'Use YYYY-MM or "present"' }
+      - { name: summary, label: Summary, type: text, required: true }
+      - { name: highlights, label: Highlights, type: string, list: true }
+      - { name: tags, label: Tags, type: string, list: true }
+      - { name: order, label: Sort order (lower = first), type: number, default: 100 }
+
+  # ─────────────────────── Site settings ──────────────────────
+  - name: site
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - { name: monogram, label: Monogram (logo initials), type: string, required: true }
+      - { name: headline, label: Headline (one line), type: string, required: true }
+      - { name: intro, label: Hero intro, type: text, required: true }
+      - { name: availability, label: Availability badge, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: bio, label: About paragraphs, type: text, list: { min: 1 } }
+      - { name: photo, label: Photo, type: image, options: { media: images } }
+      - { name: photoAlt, label: Photo alt text, type: string }
+      - { name: email, label: Public email (optional), type: string }
+      - { name: resumeUrl, label: Resume PDF, type: file, options: { media: files } }
+      - { name: bookingUrl, label: Booking link (Calendly/Cal.com), type: string }
+      - name: socials
+        label: Social links
+        type: object
+        fields:
+          - { name: github, label: GitHub URL, type: string }
+          - { name: linkedin, label: LinkedIn URL, type: string }
+          - { name: huggingface, label: Hugging Face URL, type: string }
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - { name: title, label: Default page title, type: string, required: true }
+          - { name: description, label: Meta description (≤200 chars), type: text, required: true }
+          - { name: ogImage, label: Social share image (1200×630), type: image, options: { media: images } }
+      - name: currentWork
+        label: Current work
+        type: object
+        fields:
+          - { name: eyebrow, label: Eyebrow, type: string }
+          - { name: title, label: Title, type: string, required: true }
+          - { name: summary, label: Summary, type: text, required: true }
+          - { name: points, label: Key points, type: string, list: true }
+          - { name: stack, label: Stack, type: string, list: true }
+          - { name: status, label: Status badge, type: string }
+      - name: skills
+        label: Skills
+        type: object
+        list: true
+        fields:
+          - { name: group, label: Group, type: string, required: true }
+          - { name: items, label: Items, type: string, list: true }
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - { name: heading, label: Heading, type: string }
+          - { name: intro, label: Intro, type: text }
+          - name: form
+            label: Inquiry form
+            type: object
+            fields:
+              - name: provider
+                label: Provider
+                type: select
+                options: { values: [formspree, web3forms, getform, custom] }
+              - { name: endpoint, label: Endpoint URL, type: string, required: true }
+              - { name: accessKey, label: Access key (web3forms only), type: string }
+              - { name: honeypotField, label: Honeypot field name, type: string }
+              - { name: projectTypes, label: Project type options, type: string, list: true }
+              - { name: budgets, label: Budget options, type: string, list: true }
+              - { name: timelines, label: Timeline options, type: string, list: true }

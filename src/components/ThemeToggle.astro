@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+---
+<button
+  type="button"
+  data-theme-toggle
+  class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+  aria-label="Toggle dark mode"
+  aria-pressed="false"
+>
+  <Icon name="moon" class="h-5 w-5 dark:hidden" />
+  <Icon name="sun" class="hidden h-5 w-5 dark:block" />
+</button>
+<script>
+  function sync() {
+    const dark = document.documentElement.classList.contains('dark');
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(dark)));
+  }
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+      sync();
+    }),
+  );
+  sync();
+</script>

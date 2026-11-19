@@ -1,0 +1,27 @@
+---
+import { site } from '@/lib/site';
+import { href } from '@/lib/paths';
+import Icon from './Icon.astro';
+---
+<section class="relative overflow-hidden" aria-labelledby="hero-title">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(60rem_30rem_at_80%_-10%,var(--accent-soft),transparent_70%)]"></div>
+  <div class="container-page pb-20 pt-20 sm:pb-28 sm:pt-28">
+    {site.availability && (
+      <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-muted">
+        <span class="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
+        {site.availability}
+      </p>
+    )}
+    <h1 id="hero-title" class="mt-6 text-4xl font-bold tracking-tight text-ink sm:text-6xl">
+      {site.name}
+    </h1>
+    <p class="mt-5 max-w-3xl text-2xl font-medium leading-snug tracking-tight text-ink/90 sm:text-3xl">
+      {site.headline}
+    </p>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{site.intro}</p>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href={href('/#work')} class="btn-primary">View work <Icon name="arrowRight" class="h-4 w-4" /></a>
+      <a href={href('/#contact')} class="btn-secondary">Work with me</a>
+    </div>
+  </div>
+</section>

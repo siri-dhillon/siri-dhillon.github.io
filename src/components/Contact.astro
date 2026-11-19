@@ -1,0 +1,160 @@
+---
+import { site } from '@/lib/site';
+import { href } from '@/lib/paths';
+import { publicFileExists } from '@/lib/content';
+import { providerSetup, isConfigured } from '@/lib/form';
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
+const { form } = site.contact;
+const setup = providerSetup(form);
+const configured = isConfigured(form);
+const hasResume = publicFileExists(site.resumeUrl);
+if (!configured) console.warn('[contact] Form endpoint is a placeholder — set contact.form.endpoint in src/data/site.json');
+if (site.resumeUrl && !hasResume) console.warn(`[contact] ${site.resumeUrl} not found in /public — resume link hidden`);
+
+const sideLinks = [
+  site.bookingUrl && { label: 'Book a call', url: site.bookingUrl, icon: 'calendar' as const, external: true },
+  hasResume && { label: 'Resume (PDF)', url: href(site.resumeUrl), icon: 'file' as const, external: false },
+  site.socials.linkedin && { label: 'LinkedIn', url: site.socials.linkedin, icon: 'linkedin' as const, external: true },
+  site.socials.github && { label: 'GitHub', url: site.socials.github, icon: 'github' as const, external: true },
+  site.email && { label: site.email, url: `mailto:${site.email}`, icon: 'mail' as const, external: false },
+].filter(Boolean) as { label: string; url: string; icon: 'calendar' | 'file' | 'linkedin' | 'github' | 'mail'; external: boolean }[];
+---
+<section id="contact" class="section border-t border-line bg-surface/50" aria-labelledby="contact-title">
+  <div class="container-page grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+    <div>
+      <SectionHeading id="contact-title" eyebrow="Contact" title={site.contact.heading} lead={site.contact.intro} />
+      <ul class="mt-8 space-y-3">
+        {sideLinks.map((l) => (
+          <li>
+            <a href={l.url} class="group inline-flex items-center gap-3 font-medium text-ink hover:text-accent"
+              {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+              <span class="grid h-10 w-10 place-items-center rounded-xl border border-line bg-bg text-muted group-hover:text-accent"><Icon name={l.icon} /></span>
+              {l.label}
+              {l.external && <span class="sr-only">(opens in a new tab)</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="card bg-bg">
+      <form
+        action={form.endpoint}
+        method="POST"
+        accept-charset="UTF-8"
+        class="grid gap-5 sm:grid-cols-2"
+        data-inquiry-form
+        data-honeypot={setup.honeypot}
+        aria-describedby={configured ? undefined : 'form-config-note'}
+      >
+        {Object.entries(setup.hidden).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
+        <input type="hidden" name={setup.subjectField} value={`New inquiry from ${site.name}'s website`} />
+
+        <!-- Honeypot: hidden from people and assistive tech; bots fill it in. -->
+        <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+          <label>Leave this field empty <input type="text" name={setup.honeypot} tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <div>
+          <label for="f-name" class="label">Name <span class="text-muted" aria-hidden="true">*</span></label>
+          <input id="f-name" name="name" type="text" required autocomplete="name" class="field" />
+        </div>
+        <div>
+          <label for="f-email" class="label">Email <span class="text-muted" aria-hidden="true">*</span></label>
+          <input id="f-email" name={setup.emailField} type="email" required autocomplete="email" class="field" />
+        </div>
+        <div>
+          <label for="f-type" class="label">Project type <span class="text-muted" aria-hidden="true">*</span></label>
+          <select id="f-type" name="project_type" required class="field">
+            <option value="">Select…</option>
+            {form.projectTypes.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="f-budget" class="label">Budget range</label>
+          <select id="f-budget" name="budget" class="field">
+            <option value="">Select…</option>
+            {form.budgets.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="f-timeline" class="label">Timeline</label>
+          <select id="f-timeline" name="timeline" class="field">
+            <option value="">Select…</option>
+            {form.timelines.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="f-message" class="label">Message <span class="text-muted" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" rows="5" required minlength="10" class="field resize-y"
+            placeholder="What are you trying to build or solve?"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm text-muted"><span aria-hidden="true">*</span> Required</p>
+          <button type="submit" class="btn-primary" disabled={!configured}>
+            <span data-label>Send inquiry</span> <Icon name="arrowRight" class="h-4 w-4" />
+          </button>
+        </div>
+        {!configured && (
+          <p id="form-config-note" class="rounded-xl border border-dashed border-line p-3 text-sm text-muted sm:col-span-2">
+            The inquiry form isn't connected yet. Please reach out on LinkedIn in the meantime.
+          </p>
+        )}
+        <p data-error role="alert" class="hidden rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-800 sm:col-span-2 dark:border-red-900 dark:bg-red-950 dark:text-red-200"></p>
+      </form>
+
+      <div data-success class="hidden py-8 text-center" tabindex="-1" role="status">
+        <span class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent-soft text-accent"><Icon name="check" class="h-6 w-6" /></span>
+        <h3 class="mt-4 text-xl font-semibold text-ink">Thanks, your message is on its way.</h3>
+        <p class="mt-2 text-muted">I'll get back to you within two business days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-inquiry-form]');
+  if (form) {
+    const success = form.parentElement!.querySelector<HTMLElement>('[data-success]')!;
+    const error = form.querySelector<HTMLElement>('[data-error]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const label = button.querySelector<HTMLElement>('[data-label]')!;
+    const honeypot = form.dataset.honeypot || '_gotcha';
+
+    const showSuccess = () => {
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+      success.focus();
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      error.classList.add('hidden');
+      const data = new FormData(form);
+
+      // Bot filled the honeypot: pretend it worked, send nothing.
+      if (String(data.get(honeypot) ?? '').trim() !== '') return showSuccess();
+
+      button.disabled = true;
+      label.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || body?.success === false) throw new Error(body?.errors?.[0]?.message || body?.message || `HTTP ${res.status}`);
+        form.reset();
+        showSuccess();
+      } catch (err) {
+        error.textContent = "Sorry, your message couldn't be sent. Please try again, or reach out on LinkedIn.";
+        error.classList.remove('hidden');
+        console.error('[contact]', err);
+      } finally {
+        button.disabled = false;
+        label.textContent = 'Send inquiry';
+      }
+    });
+  }
+</script>
