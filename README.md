@@ -38,17 +38,10 @@ npm run check      # TypeScript + Astro diagnostics
 
 Requires Node 22.12+ (CI uses Node 24).
 
-## Replace the placeholder copy
+## Before sharing the site
 
-Placeholder text is marked `PLACEHOLDER` (visible on the page so you can't miss it). Find all of it with:
+Projects come from my GitHub repos, and experience matches my LinkedIn (Nov 2026). Before sharing widely:
 
-```bash
-grep -rn PLACEHOLDER src
-```
-
-- **site.json**: intro, location, bio, current-work bullet points.
-- **projects**: the three seeded case studies (`rag-knowledge-assistant`, `operations-analytics-pipeline`, `client-portal-platform`) are invented examples. Replace or delete them. `professional-alter-ego` is real and comes from the old site.
-- **experience**: dates for the Ford, cancer research lab, and SFU lab entries are placeholders.
 - **Resume**: put your PDF at `public/resume.pdf`. The resume link stays hidden until that file exists.
 - **Booking link**: set `bookingUrl` in `site.json` (Calendly, Cal.com, etc.). It stays hidden while empty.
 - **Photo**: `public/images/headshot.jpg` is used through a 480px optimized copy. After replacing it, run `npm run og`. If you clear `photo`, a placeholder box is shown instead.

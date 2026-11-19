@@ -1,13 +1,13 @@
 ---
-# PLACEHOLDER dates and org name — update to match your resume.
-role: Data Engineering & QA Research Assistant
-org: Cancer research lab
+role: Data Quality Assurance Engineer
+org: FAISAL Lab, Simon Fraser University
+location: Burnaby, BC · Remote
 start: 2021-05
 end: 2021-12
-summary: Data quality assurance and medical imaging pipelines for clinical research.
+summary: Medical imaging data engineering at the Functional & Anatomical Imaging & Shape Analysis Lab, supporting cancer research.
 highlights:
-  - Designed ETL pipelines for MRI / DICOM data, achieving 100% data accuracy for clinical research
-  - "PLACEHOLDER — Data QA processes for research datasets"
-tags: [Python, DICOM, MRI, ETL, Data QA]
-order: 3
+  - Cleaned and validated MRI and DICOM medical imaging data
+  - Built ingestion pipelines feeding imaging data into the lab's diagnostic models
+tags: [Python, DICOM, MRI, Data cleaning, ETL, AI]
+order: 2
 ---

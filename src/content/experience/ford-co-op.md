@@ -1,13 +1,13 @@
 ---
-# PLACEHOLDER dates — set start/end to the real co-op term.
-role: Software Engineering Co-op
+role: Software Infrastructure Developer (Co-op)
 org: Ford Motor Company
-start: 2022-01
-end: 2022-08
-summary: Test automation for vehicle software validation.
+location: Kanata, ON
+start: 2019-09
+end: 2019-12
+summary: Test automation and infrastructure tooling for vehicle software development.
 highlights:
-  - Authored automation scripts that reduced testing runtime by 6.25%
-  - "PLACEHOLDER — add another highlight"
-tags: [Python, Automation, Testing]
-order: 2
+  - Automated manual testing with scripts that reduced testing runtime by 6.25%
+  - Worked across C++ and MQTT-based systems in an agile engineering team
+tags: [C++, MQTT, Python, Bash, Test automation]
+order: 3
 ---
