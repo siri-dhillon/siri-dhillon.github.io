@@ -11,6 +11,8 @@ solution: A Python SAR pipeline designed to run onboard. A NumPy range-Doppler r
 stack: [Python, NumPy, JAX, Sentinel-1, AIS, pytest, uv, GitHub Actions]
 outcome: Focused synthetic targets match theory. Range resolution measured 2.65 m against a theoretical 2.66 m, with −13.5 dB range PSLR, and quality is identical at near, mid, and far range. Next steps are focusing real Level-0 data, benchmarking CPU vs Trillium TPU, and ship detection.
 featured: true
+# Hidden until milestones M2/M2b are done — set draft: false to publish.
+draft: true
 order: 1
 confidential: false
 ---

@@ -1,13 +1,13 @@
 {
   "name": "Sirpreet Dhillon",
   "monogram": "SD",
-  "headline": "Systems & AI engineer building LLM applications, data pipelines, and ML that runs at the edge.",
-  "intro": "I take AI and software projects from idea to production: retrieval-augmented assistants, multi-agent systems, full-stack apps, data pipelines, and, most recently, radar processing for Trillium TPUs in orbit.",
+  "headline": "Systems & AI engineer building LLM applications, multi-agent systems, and data pipelines.",
+  "intro": "I take AI and software projects from idea to production: retrieval-augmented assistants, multi-agent systems, full-stack apps, and data pipelines.",
   "location": "Washington, DC–Baltimore area · Open to remote",
   "availability": "Open to AI / forward deployed engineer roles and select freelance projects",
   "bio": [
     "I'm Sirpreet (Siri) Dhillon, a systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University. Since 2019 I've worked independently, designing and shipping software and AI solutions for small businesses and individual clients, from requirements through production.",
-    "My background runs from hardware to the cloud. I've designed bio-amplifier circuits in an SFU research lab, built FPGA graphics cores, automated testing at Ford, and engineered medical-imaging pipelines in the FAISAL lab. Today I build LLM applications and agents, and I'm developing a SAR processing pipeline designed to run on Trillium TPUs aboard satellites.",
+    "My background runs from hardware to the cloud. I've designed bio-amplifier circuits in an SFU research lab, built FPGA graphics cores, automated testing at Ford, and engineered medical-imaging pipelines in the FAISAL lab. Today I build LLM applications and multi-agent systems.",
     "I work best embedded with a team: understanding the real problem, building the thing, and staying until it works in production."
   ],
   "photo": "/images/headshot-480.jpg",
@@ -22,10 +22,11 @@
   },
   "seo": {
     "title": "Sirpreet Dhillon — Systems & AI Engineer",
-    "description": "Sirpreet (Siri) Dhillon, systems & AI engineer: LLM apps and agents, full-stack products, data pipelines, and edge ML. Open to AI and forward deployed engineering roles.",
+    "description": "Sirpreet (Siri) Dhillon, systems & AI engineer: LLM apps and multi-agent systems, full-stack products, and data pipelines. Open to AI and forward deployed engineering roles.",
     "ogImage": "/og-default.png"
   },
   "currentWork": {
+    "enabled": false,
     "eyebrow": "Current work",
     "title": "SAR processing on Trillium TPUs, in orbit",
     "summary": "Radar satellites spend most of their downlink budget sending raw synthetic-aperture radar data to the ground, where it waits hours to be processed. I'm building an open pipeline that focuses and analyzes the raw radar signal onboard, on a Google Trillium TPU, so the satellite sends back answers instead of raw data.",
@@ -97,8 +98,6 @@
       "group": "Systems & Edge",
       "items": [
         "C / C++",
-        "SAR signal processing",
-        "Trillium TPUs",
         "VHDL & FPGA (Zynq)",
         "ns-3",
         "ROS",

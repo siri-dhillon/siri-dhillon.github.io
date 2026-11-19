@@ -30,6 +30,8 @@ const siteSchema = z.object({
     ogImage: z.string().min(1),
   }),
   currentWork: z.object({
+    /** false hides the whole Current work section (content is kept). */
+    enabled: z.boolean().default(true),
     eyebrow: z.string(),
     title: z.string().min(1),
     summary: z.string().min(1),
