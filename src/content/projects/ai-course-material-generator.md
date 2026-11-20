@@ -13,4 +13,6 @@ outcome: One prompt produces a downloadable deck and document in minutes, with s
 featured: true
 order: 5
 confidential: false
+resumeBullets:
+  - "Built a Gemini research agent that searches and scrapes the web on any topic, then renders styled slide decks (.pptx) and documents (.docx) through an Express back end, streaming progress to a React UI."
 ---

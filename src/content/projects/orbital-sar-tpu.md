@@ -15,6 +15,10 @@ featured: true
 draft: true
 order: 1
 confidential: false
+resumeBullets:
+  - "Building an open synthetic-aperture radar (SAR) processing stack designed to run on a Google Trillium TPU in orbit, so satellites downlink small prioritized alerts instead of raw radar data."
+  - "Implemented a NumPy range-Doppler reference (range compression, RCMC, azimuth compression) validated by a point-target simulator: 2.65 m measured vs 2.66 m theoretical range resolution, −13.5 dB PSLR."
+  - "Ported the focusing chain to JAX for Trillium TPU execution and built verified, reproducible real-data pipelines (Sentinel-1C scene, precise orbits, NOAA AIS) with tests, CI, and architecture decision records."
 ---
 
 ## How SAR focusing works

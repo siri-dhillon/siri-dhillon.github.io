@@ -49,6 +49,27 @@ Projects come from my GitHub repos, and experience matches my LinkedIn (Nov 2026
 
 ---
 
+## Resume (generated from the site content)
+
+```bash
+npm run resume
+```
+
+This builds the resume from the same files as the website, so the two always match:
+
+- **Header, summary, skills, certifications:** `src/data/site.json` (the `resume` block, plus `skills`, `location` and `socials`)
+- **Experience:** `src/content/experience/*.md`
+- **Projects:** any project with `resumeBullets`, in `order`. Projects without `resumeBullets` are left off.
+
+It writes two PDFs (needs Chrome; set `CHROME_PATH` if it isn't found):
+
+| File | Contents | Published? |
+|---|---|---|
+| `public/resume.pdf` | Drafts excluded | Yes, linked from the site |
+| `resume/out/Sirpreet-Dhillon-Resume-Full.pdf` | Includes `draft: true` projects | No, gitignored; use it for applications |
+
+Re-run `npm run resume` after changing content, then commit `public/resume.pdf`.
+
 ## Adding a project (pick one, each takes under 5 minutes)
 
 Every project file has these fields. A missing required field or a wrong type **fails the build**, so a broken file can't be deployed.

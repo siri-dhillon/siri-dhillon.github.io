@@ -16,6 +16,9 @@ links:
   demo: https://sirpreet-professional-alter-ego.hf.space
   repo: https://github.com/siri-dhillon/professional_you
 confidential: false
+resumeBullets:
+  - "Built a RAG digital twin grounded in my career documents (LangChain, ChromaDB, GPT-4o-mini) that answers recruiter questions accurately, deployed on Hugging Face Spaces."
+  - "Added a GitHub GraphQL tool for live repository data and a Pushover integration that sends recruiter leads to my phone in seconds."
 ---
 
 ## Architecture

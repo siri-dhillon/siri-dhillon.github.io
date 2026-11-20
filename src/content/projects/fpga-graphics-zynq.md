@@ -15,4 +15,6 @@ order: 6
 links:
   repo: https://github.com/siri-dhillon/EmbeddedVGA_Zynq
 confidential: false
+resumeBullets:
+  - "Designed a VGA display core on a Xilinx Zynq-7000 with DDR frame buffers and double buffering for tear-free output up to 1080p, and re-implemented Missile Command with custom VHDL blocks and a MicroBlaze processor."
 ---

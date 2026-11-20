@@ -107,6 +107,10 @@ content:
         label: Draft (hidden from the live site)
         type: boolean
         default: false
+      - name: resumeBullets
+        label: Resume bullets (leave empty to keep off the resume)
+        type: string
+        list: true
       - name: cover
         label: Cover image (optional)
         type: image
@@ -230,6 +234,13 @@ content:
           - { name: points, label: Key points, type: string, list: true }
           - { name: stack, label: Stack, type: string, list: true }
           - { name: status, label: Status badge, type: string }
+      - name: resume
+        label: Resume (npm run resume)
+        type: object
+        fields:
+          - { name: title, label: Title under name, type: string }
+          - { name: summary, label: Summary, type: text }
+          - { name: certifications, label: Certifications, type: string, list: true }
       - name: skills
         label: Skills
         type: object

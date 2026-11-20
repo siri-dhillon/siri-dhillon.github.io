@@ -39,6 +39,9 @@ const siteSchema = z.object({
     stack: z.array(z.string()),
     status: z.string().default(''),
   }),
+  resume: z
+    .object({ title: z.string().min(1), summary: z.string().min(1), certifications: z.array(z.string()).default([]) })
+    .optional(),
   skills: z.array(z.object({ group: z.string(), items: z.array(z.string()) })),
   contact: z.object({
     heading: z.string(),

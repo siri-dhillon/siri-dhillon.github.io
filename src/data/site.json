@@ -45,6 +45,13 @@
     ],
     "status": "In progress"
   },
+  "resume": {
+    "title": "Systems & AI Engineer",
+    "summary": "Systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University and seven years of independent work taking software and AI projects from requirements to production. Builds LLM applications, multi-agent systems, full-stack products, and data pipelines, backed by hands-on hardware experience in FPGA design, circuit design, and test automation.",
+    "certifications": [
+      "AWS Certified Cloud Practitioner | Amazon Web Services"
+    ]
+  },
   "skills": [
     {
       "group": "AI & LLM",

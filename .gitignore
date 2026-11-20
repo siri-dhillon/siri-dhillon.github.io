@@ -19,3 +19,6 @@ npm-debug.log*
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# generated resume drafts (full version may include unpublished projects)
+resume/out/

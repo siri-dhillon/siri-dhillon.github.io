@@ -14,7 +14,8 @@
     "sync": "astro sync",
     "new-project": "node scripts/new-project.mjs",
     "og": "node scripts/generate-images.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "resume": "node scripts/build-resume.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",
@@ -26,6 +27,7 @@
     "@tailwindcss/vite": "^4.3.5",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.5",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
   }
 }

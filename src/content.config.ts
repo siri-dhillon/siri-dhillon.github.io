@@ -64,6 +64,8 @@ const projects = defineCollection({
         .optional()
         .default({ repo: undefined, demo: undefined }),
       confidential: z.boolean().default(false),
+      /** Bullets for the generated resume (npm run resume). Empty = not on the resume. */
+      resumeBullets: z.array(z.string().trim().min(1)).default([]),
       draft: z.boolean().default(false),
     })
     .refine((p) => !p.cover || (p.coverAlt && p.coverAlt.trim().length > 0), {
