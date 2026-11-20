@@ -49,7 +49,7 @@ const allProjects = readCollection('src/content/projects')
   .filter((p) => Array.isArray(p.resumeBullets) && p.resumeBullets.length)
   .sort(byOrder);
 
-if (!site.resume) throw new Error('site.json is missing the "resume" block (title, summary, certifications)');
+if (!site.resume) throw new Error('site.json is missing the "resume" block (title, summary)');
 
 function render({ includeDrafts }) {
   const projects = allProjects.filter((p) => includeDrafts || !p.draft);
@@ -74,9 +74,9 @@ function render({ includeDrafts }) {
 <html lang="en"><head><meta charset="utf-8">
 <title>${esc(site.name)} — Resume</title>
 <style>
-  @page { size: Letter; margin: 0.55in 0.6in; }
+  @page { size: Letter; margin: 0.5in 0.6in; }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: Aptos, Calibri, "Segoe UI", "Helvetica Neue", Arial, sans-serif; font-size: 10.5pt; line-height: 1.32; color: #111; }
+  body { margin: 0; font-family: Aptos, Calibri, "Segoe UI", "Helvetica Neue", Arial, sans-serif; font-size: 10.25pt; line-height: 1.28; color: #111; }
   a { color: inherit; text-decoration: none; }
   header { display: grid; grid-template-columns: 1fr 3.4in; gap: 0.3in; align-items: start; padding-bottom: 8pt; border-bottom: 1px solid #111; }
   h1 { font-family: "Times New Roman", Times, serif; font-size: 30pt; line-height: 1; margin: 0; font-weight: 700; letter-spacing: -0.3pt; }
@@ -85,16 +85,17 @@ function render({ includeDrafts }) {
   table.contact td { padding: 3pt 0; border-bottom: 1px solid #111; }
   table.contact tr:last-child td { border-bottom: 0; }
   table.contact td:last-child { text-align: right; }
-  section { border-bottom: 1px solid #111; padding: 7pt 0 6pt; }
+  section { border-bottom: 1px solid #111; padding: 6pt 0 5pt; }
+  section.keep { break-inside: avoid; }
   section:last-of-type { border-bottom: 0; }
   h2 { font-size: 10.5pt; font-weight: 700; text-transform: uppercase; margin: 0 0 4pt; letter-spacing: 0.2pt; }
-  .row { display: grid; grid-template-columns: 2.35in 1fr; gap: 0.2in; margin: 0 0 6pt; break-inside: avoid; }
+  .row { display: grid; grid-template-columns: 2.35in 1fr; gap: 0.2in; margin: 0 0 5pt; break-inside: avoid; }
   .row:last-child { margin-bottom: 0; }
   .left { line-height: 1.4; }
   .left b { display: block; }
   .muted { color: #222; }
   ul.right { margin: 0; padding-left: 14pt; }
-  ul.right li { margin: 0 0 2.5pt; padding-left: 2pt; }
+  ul.right li { margin: 0 0 2pt; padding-left: 2pt; }
   .summary { display: grid; grid-template-columns: 2.35in 1fr; gap: 0.2in; }
   .summary h2 { margin: 0; }
   .summary p { margin: 0; }
@@ -137,20 +138,22 @@ function render({ includeDrafts }) {
       .join('')}
   </section>
 
-  <section>
+  <section class="keep">
     <h2>Skills</h2>
     ${skills.map((g) => `<div class="row"><div class="left"><b>${esc(g.group)}</b></div><div>${g.items.map(esc).join(' • ')}</div></div>`).join('')}
   </section>
 
-  <section>
+  <section class="keep">
     <h2>Education</h2>
     <div class="row"><div class="left"><b>Bachelor of Applied Science</b>Computer Engineering</div><div>Simon Fraser University | Graduated 2023</div></div>
   </section>
 
   ${
-    site.resume.certifications?.length
-      ? `<section><h2>Additional Information</h2>
-    <div class="row"><div class="left"><b>Certifications</b></div><ul class="right">${site.resume.certifications.map((c) => `<li>${esc(c)}</li>`).join('')}</ul></div></section>`
+    site.certifications?.length
+      ? `<section class="keep summary"><h2>Certifications</h2>
+    <ul class="right">${site.certifications
+      .map((c) => `<li><b>${esc(c.name)}</b> | ${esc(c.issuer)} | ${ym(c.issued)}${c.expires ? `, valid till ${ym(c.expires)}` : ''}</li>`)
+      .join('')}</ul></section>`
       : ''
   }
 </body></html>`;

@@ -57,7 +57,7 @@ npm run resume
 
 This builds the resume from the same files as the website, so the two always match:
 
-- **Header, summary, skills, certifications:** `src/data/site.json` (the `resume` block, plus `skills`, `location` and `socials`)
+- **Header, summary, skills, certifications:** `src/data/site.json` (the `resume` block, plus `skills`, `certifications`, `location` and `socials`). Certifications also show on the website, with issue and valid-till dates only, no credential links.
 - **Experience:** `src/content/experience/*.md`
 - **Projects:** any project with `resumeBullets`, in `order`. Projects without `resumeBullets` are left off.
 

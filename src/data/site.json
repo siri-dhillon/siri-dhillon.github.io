@@ -47,10 +47,7 @@
   },
   "resume": {
     "title": "Systems & AI Engineer",
-    "summary": "Systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University and seven years of independent work taking software and AI projects from requirements to production. Builds LLM applications, multi-agent systems, full-stack products, and data pipelines, backed by hands-on hardware experience in FPGA design, circuit design, and test automation.",
-    "certifications": [
-      "AWS Certified Cloud Practitioner | Amazon Web Services"
-    ]
+    "summary": "Systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University and seven years of independent work taking software and AI projects from requirements to production. Builds LLM applications, multi-agent systems, full-stack products, and data pipelines, backed by hands-on hardware experience in FPGA design, circuit design, and test automation."
   },
   "skills": [
     {
@@ -94,7 +91,6 @@
     {
       "group": "Cloud & DevOps",
       "items": [
-        "AWS Certified Cloud Practitioner",
         "Serverless",
         "Docker",
         "GitHub Actions CI/CD",
@@ -111,6 +107,20 @@
         "MQTT",
         "Arduino"
       ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "CompTIA Security+ ce",
+      "issuer": "CompTIA",
+      "issued": "2026-08",
+      "expires": "2029-08"
+    },
+    {
+      "name": "AWS Certified Cloud Practitioner",
+      "issuer": "Amazon Web Services",
+      "issued": "2024-04",
+      "expires": "2029-11"
     }
   ],
   "contact": {

@@ -240,7 +240,6 @@ content:
         fields:
           - { name: title, label: Title under name, type: string }
           - { name: summary, label: Summary, type: text }
-          - { name: certifications, label: Certifications, type: string, list: true }
       - name: skills
         label: Skills
         type: object
@@ -248,6 +247,22 @@ content:
         fields:
           - { name: group, label: Group, type: string, required: true }
           - { name: items, label: Items, type: string, list: true }
+      - name: certifications
+        label: Certifications
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: issuer, label: Issuer, type: string, required: true }
+          - name: issued
+            label: Issued (YYYY-MM)
+            type: string
+            required: true
+            pattern: { regex: "^\\d{4}-(0[1-9]|1[0-2])$", message: "Use YYYY-MM" }
+          - name: expires
+            label: Valid till (YYYY-MM, optional)
+            type: string
+            pattern: { regex: "^(\\d{4}-(0[1-9]|1[0-2]))?$", message: "Use YYYY-MM" }
       - name: contact
         label: Contact
         type: object

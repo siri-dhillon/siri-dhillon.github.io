@@ -1,10 +1,12 @@
 ---
 import { site } from '@/lib/site';
 import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import { formatYearMonth } from '@/lib/content';
 ---
 <section id="skills" class="section border-t border-line bg-surface/50" aria-labelledby="skills-title">
   <div class="container-page">
-    <SectionHeading id="skills-title" eyebrow="Skills & stack" title="Tools I reach for" />
+    <SectionHeading id="skills-title" eyebrow="Skills & certifications" title="Tools I reach for" />
     <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {site.skills.map((g) => (
         <div class="card bg-bg">
@@ -13,5 +15,22 @@ import SectionHeading from './SectionHeading.astro';
         </div>
       ))}
     </div>
+    {site.certifications.length > 0 && (
+      <>
+        <h3 class="mt-14 text-xl font-semibold text-ink">Certifications</h3>
+        <ul class="mt-5 grid gap-5 sm:grid-cols-2">
+          {site.certifications.map((c) => (
+            <li class="card flex items-start gap-4 bg-bg">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"><Icon name="check" class="h-6 w-6" /></span>
+              <div>
+                <p class="font-semibold text-ink">{c.name}</p>
+                <p class="mt-1 text-sm text-muted">{c.issuer} · Issued {formatYearMonth(c.issued)}</p>
+                {c.expires && <p class="mt-0.5 text-sm text-muted">Valid till {formatYearMonth(c.expires)}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
   </div>
 </section>

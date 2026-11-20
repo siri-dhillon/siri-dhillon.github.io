@@ -40,9 +40,19 @@ const siteSchema = z.object({
     status: z.string().default(''),
   }),
   resume: z
-    .object({ title: z.string().min(1), summary: z.string().min(1), certifications: z.array(z.string()).default([]) })
+    .object({ title: z.string().min(1), summary: z.string().min(1) })
     .optional(),
   skills: z.array(z.object({ group: z.string(), items: z.array(z.string()) })),
+  certifications: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        issuer: z.string().min(1),
+        issued: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'use YYYY-MM'),
+        expires: z.string().regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'use YYYY-MM').optional(),
+      }),
+    )
+    .default([]),
   contact: z.object({
     heading: z.string(),
     intro: z.string(),
