@@ -16,6 +16,5 @@ links:
   repo: https://github.com/siri-dhillon/weather_app
 confidential: false
 resumeBullets:
-  - "Shipped a Next.js 15 + TypeScript weather app with city, ZIP, and GPS search, parallel historical lookups, and Prisma/SQLite search history with CSV/JSON export."
-  - "Compared SARIMAX, XGBoost, and KNN forecasts on a global weather dataset, scoring them with RMSE and MAE."
+  - "Shipped a Next.js 15 + TypeScript weather app (city/ZIP/GPS search, parallel historical lookups, Prisma/SQLite history with CSV/JSON export), and compared SARIMAX, XGBoost, and KNN forecasts by RMSE and MAE."
 ---

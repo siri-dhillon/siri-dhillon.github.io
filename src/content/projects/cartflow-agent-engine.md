@@ -15,8 +15,7 @@ order: 2
 confidential: false
 resumeBullets:
   - "Built a multi-agent commerce concierge: Gemini-powered agents coordinate over an agent-to-agent (A2A) protocol and reach the catalog, storefront, and customer data through MCP servers."
-  - "Generated live Shopify checkout links through the Storefront GraphQL API, with human-in-the-loop approval in a Streamlit console for discounts above 20% and for bundles."
-  - "Closed the loop with click-stream signals and persistent memory, and covered the multi-agent flow with end-to-end tests."
+  - "Generated live Shopify checkout links through the Storefront GraphQL API, with human-in-the-loop approval for discounts above 20%, persistent memory, and end-to-end tests."
 ---
 
 ## Closed-loop architecture

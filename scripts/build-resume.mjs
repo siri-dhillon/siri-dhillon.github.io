@@ -89,13 +89,14 @@ function render({ includeDrafts }) {
   section.keep { break-inside: avoid; }
   section:last-of-type { border-bottom: 0; }
   h2 { font-size: 10.5pt; font-weight: 700; text-transform: uppercase; margin: 0 0 4pt; letter-spacing: 0.2pt; }
+  /* Grid keeps text in reading order (label, then bullets) for applicant tracking systems. */
   .row { display: grid; grid-template-columns: 2.35in 1fr; gap: 0.2in; margin: 0 0 5pt; break-inside: avoid; }
   .row:last-child { margin-bottom: 0; }
   .left { line-height: 1.4; }
   .left b { display: block; }
   .muted { color: #222; }
-  ul.right { margin: 0; padding-left: 14pt; }
-  ul.right li { margin: 0 0 2pt; padding-left: 2pt; }
+  ul.right { margin-top: 0; margin-bottom: 0; padding-left: 14pt; }
+  ul.right li { margin: 0 0 2pt; padding-left: 2pt; orphans: 2; widows: 2; }
   .summary { display: grid; grid-template-columns: 2.35in 1fr; gap: 0.2in; }
   .summary h2 { margin: 0; }
   .summary p { margin: 0; }
