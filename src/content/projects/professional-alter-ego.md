@@ -8,16 +8,15 @@ year: 2025
 role: Designer & engineer
 problem: Static resumes can't answer follow-up questions, and generic chatbots hallucinate dates, degrees, and project roles. I wanted recruiters to get accurate answers instantly and for me to hear about serious interest right away.
 solution: A retrieval-augmented agent grounded in my career documents (chunked and embedded into ChromaDB), with a custom GitHub GraphQL tool for live repository data and a Pushover integration that notifies my phone when someone wants to connect. An early live-scraping design was replaced with a persistent vector store after hitting anti-scraping limits.
-stack: [Python, LangChain, OpenAI GPT-4o-mini, ChromaDB, Gradio, GitHub GraphQL API, Pushover API, Hugging Face Spaces]
+stack: [Python, LangChain, OpenAI GPT-4o-mini, ChromaDB, Gradio, GitHub GraphQL API, Pushover API]
 outcome: Answers stay grounded in retrieved context, with no invented dates or roles in testing, and recruiter interest reaches my phone in seconds.
 featured: true
 order: 3
 links:
-  demo: https://sirpreet-professional-alter-ego.hf.space
   repo: https://github.com/siri-dhillon/professional_you
 confidential: false
 resumeBullets:
-  - "Built a RAG digital twin grounded in my career documents (LangChain, ChromaDB, GPT-4o-mini) that answers recruiter questions accurately, deployed on Hugging Face Spaces."
+  - "Built a RAG digital twin grounded in my career documents (LangChain, ChromaDB, GPT-4o-mini) that answers recruiter questions accurately, served through a Gradio web app."
   - "Added a GitHub GraphQL tool for live repository data and a Pushover integration that sends recruiter leads to my phone in seconds."
 ---
 
