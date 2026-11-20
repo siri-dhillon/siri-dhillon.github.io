@@ -111,7 +111,7 @@
     "intro": "Hiring for an AI or forward deployed engineering role, or have a project in mind? Tell me a bit about it and I'll reply within two business days.",
     "form": {
       "provider": "formspree",
-      "endpoint": "https://formspree.io/f/YOUR_FORM_ID",
+      "endpoint": "https://formspree.io/f/maeobzgr",
       "honeypotField": "_gotcha",
       "projectTypes": [
         "AI / LLM solution",
