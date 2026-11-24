@@ -5,6 +5,63 @@
   "intro": "I take AI and software projects from idea to production: retrieval-augmented assistants, multi-agent systems, full-stack apps, and data pipelines.",
   "location": "Washington, DC–Baltimore area · Open to remote",
   "availability": "Open to AI / forward deployed engineer roles and select freelance projects",
+  "hero": {
+    "statement": "I build AI systems that ship.",
+    "statementMuted": "From prototype to production."
+  },
+  "proof": [
+    {
+      "value": "0.99",
+      "caption": "Citation accuracy",
+      "source": "Ask My Docs",
+      "href": "/work/ask-my-docs/"
+    },
+    {
+      "value": "$0.0003",
+      "caption": "Per query",
+      "source": "Ask My Docs",
+      "href": "/work/ask-my-docs/"
+    },
+    {
+      "value": "1920×1080",
+      "caption": "Tear-free FPGA video",
+      "source": "FPGA graphics",
+      "href": "/work/fpga-graphics-zynq/"
+    },
+    {
+      "value": "AWS + Security+",
+      "caption": "Certified",
+      "source": "Certifications",
+      "href": "/#about"
+    }
+  ],
+  "process": [
+    {
+      "when": "Day 0",
+      "title": "Message",
+      "text": "A few lines about the problem. I reply within 2 business days."
+    },
+    {
+      "when": "Week 1",
+      "title": "Scope",
+      "text": "A call and a one-page plan: goal, constraints, success measure."
+    },
+    {
+      "when": "Weeks 1–2",
+      "title": "Prototype",
+      "text": "A working slice on real data."
+    },
+    {
+      "when": "Ongoing",
+      "title": "Build",
+      "text": "Production code, tests, evals and weekly demos."
+    },
+    {
+      "when": "End",
+      "title": "Handover",
+      "text": "Docs, runbooks and a walkthrough. Your team owns it."
+    }
+  ],
   "bio": [
     "I'm Sirpreet (Siri) Dhillon, a systems and AI engineer with a BASc in Computer Engineering from Simon Fraser University. Since 2019 I've worked independently, designing and shipping software and AI solutions for small businesses and individual clients, from requirements through production.",
     "My background runs from hardware to the cloud. I've designed bio-amplifier circuits in an SFU research lab, built FPGA graphics cores, automated testing at Ford, and engineered medical-imaging pipelines in the FAISAL lab. Today I build LLM applications and multi-agent systems.",
@@ -124,8 +181,9 @@
     }
   ],
   "contact": {
-    "heading": "Let's build something useful",
-    "intro": "Hiring for an AI or forward deployed engineering role, or have a project in mind? Tell me a bit about it and I'll reply within two business days.",
+    "heading": "Tell me what you're building.",
+    "headingMuted": "One short message is enough to start.",
+    "intro": "Hiring for an AI or forward deployed role, or have a project in mind? I reply within 2 business days.",
     "form": {
       "provider": "formspree",
       "endpoint": "https://formspree.io/f/maeobzgr",

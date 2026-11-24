@@ -1,0 +1,130 @@
+---
+/**
+ * The one persistent call to action (DESIGN.md §6 "Inquire dock").
+ * Rendered first in <body> so keyboard and screen-reader users reach the primary
+ * nav early, but drawn as a floating pill at the bottom of the viewport.
+ */
+import { href } from '@/lib/paths';
+import Icon from './Icon.astro';
+
+const links = [
+  { label: 'Work', to: '/#work', id: 'work' },
+  { label: 'How I Work', to: '/#process', id: 'process' },
+  { label: 'About', to: '/#about', id: 'about' },
+];
+const linkClass =
+  'relative inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-label text-muted transition-colors hover:bg-surface-2 hover:text-ink aria-[current=true]:text-ink';
+---
+<nav
+  aria-label="Primary"
+  class="dock pointer-events-none fixed inset-x-0 z-50 flex justify-center px-4"
+  data-dock
+>
+  <div class="pointer-events-auto relative">
+    <div
+      id="dock-menu"
+      class="band-inverse absolute bottom-full left-0 mb-2 hidden min-w-60 rounded-card border border-line p-2 shadow-raised"
+      data-dock-menu
+    >
+      <ul class="flex flex-col">
+        {links.map((l) => (
+          <li><a href={href(l.to)} data-section-link={l.id} class="flex min-h-12 items-center rounded-control px-4 text-ink hover:bg-surface-2">{l.label}</a></li>
+        ))}
+        <li><a href={href('/work/')} class="flex min-h-12 items-center rounded-control px-4 text-ink hover:bg-surface-2">All Projects</a></li>
+      </ul>
+    </div>
+
+    <div class="band-inverse flex items-center gap-1 rounded-full border border-line p-1.5 shadow-raised">
+      <button
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-surface-2 sm:hidden"
+        aria-controls="dock-menu"
+        aria-expanded="false"
+        data-dock-toggle
+      >
+        <span class="sr-only" data-dock-toggle-label>Open menu</span>
+        <Icon name="menu" />
+      </button>
+      <ul class="hidden items-center sm:flex">
+        {links.map((l) => (
+          <li>
+            <a href={href(l.to)} data-section-link={l.id} class={linkClass}>
+              <span class="hidden h-1.5 w-1.5 rounded-full bg-accent" data-dot aria-hidden="true"></span>{l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href={href('/#inquire')} class="btn-primary group !min-h-10 !px-4">
+        Inquire <Icon name="arrowRight" class="nudge h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .dock {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    transition:
+      transform var(--duration-slow) var(--ease-out-quart),
+      opacity var(--duration-slow) var(--ease-out-quart);
+  }
+  .dock[data-hidden] {
+    transform: translateY(calc(100% + 2rem));
+    opacity: 0;
+  }
+</style>
+
+<script>
+  const dock = document.querySelector<HTMLElement>('[data-dock]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-dock-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-dock-menu]');
+  const toggleLabel = document.querySelector<HTMLElement>('[data-dock-toggle-label]');
+
+  if (dock && toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      if (toggleLabel) toggleLabel.textContent = open ? 'Close menu' : 'Open menu';
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
+    });
+    document.addEventListener('click', (e) => {
+      if (toggle.getAttribute('aria-expanded') === 'true' && !dock.contains(e.target as Node)) setOpen(false);
+    });
+  }
+
+  if (dock && 'IntersectionObserver' in window) {
+    // Mark the section currently in the middle of the viewport.
+    const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-section-link]')];
+    const sections = [...new Set(links.map((l) => l.dataset.sectionLink!))]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    const setCurrent = (id: string | null) => links.forEach((l) => {
+      const on = l.dataset.sectionLink === id;
+      if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+      l.querySelector('[data-dot]')?.classList.toggle('hidden', !on);
+    });
+    const spy = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setCurrent(e.target.id); }),
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    sections.forEach((s) => spy.observe(s));
+
+    // Step aside while the inquiry form itself is on screen (it is the destination).
+    // Re-evaluated on focus changes too, so it never hides while focus is inside it.
+    const form = document.getElementById('inquire-form');
+    if (form) {
+      let formVisible = false;
+      const update = () => {
+        const shouldHide = formVisible && !dock.contains(document.activeElement);
+        dock.toggleAttribute('data-hidden', shouldHide);
+        dock.inert = shouldHide;
+      };
+      new IntersectionObserver(([entry]) => { formVisible = entry.isIntersecting; update(); }, { threshold: 0.25 }).observe(form);
+      document.addEventListener('focusin', update);
+    }
+  }
+</script>

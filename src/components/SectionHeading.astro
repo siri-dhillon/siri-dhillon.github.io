@@ -1,10 +1,25 @@
 ---
-interface Props { eyebrow: string; title: string; id?: string; lead?: string; class?: string }
-const { eyebrow, title, id, lead, class: cls } = Astro.props;
+/**
+ * Eyebrow → two-tone h2 → optional lead (DESIGN.md §6 "Section heading").
+ * `title` is the ink clause; `titleMuted` is the follow-up clause, same <h2>.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  titleMuted?: string;
+  id?: string;
+  lead?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+const { eyebrow, title, titleMuted, id, lead, align = 'left', class: cls } = Astro.props;
+const center = align === 'center';
 ---
-<div class:list={['max-w-3xl', cls]}>
+<div class:list={[center ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl', cls]} data-reveal>
   <p class="eyebrow">{eyebrow}</p>
-  <h2 class="h2" id={id}>{title}</h2>
-  {lead && <p class="lead">{lead}</p>}
+  <h2 class="h2" id={id}>
+    {title}{titleMuted && <> <span class="tone-muted">{titleMuted}</span></>}
+  </h2>
+  {lead && <p class:list={['lead', center && 'mx-auto']}>{lead}</p>}
   <slot />
 </div>

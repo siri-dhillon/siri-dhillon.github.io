@@ -156,9 +156,9 @@ and desktop sizes, so they need no breakpoint classes.
 | `display` | 64 / 1.02 (mobile: 40) | 500 | -0.045em | Hero statement only |
 | `h1` | 52 / 1.06 (mobile: 36) | 500 | -0.04em | Page titles (/work, case study) |
 | `h2` | 48 / 1.08 (mobile: 30) | 500 | -0.035em | Section statements (two-tone) |
-| `h3` | 28 / 1.2 (mobile: 22) | 500 | -0.02em | Card titles, timeline steps |
-| `h4` | 18 / 1.4 | 600 | -0.01em | Small headings, form section titles |
-| `readout` | 56 / 1 (mobile: 40), **mono** | 500 | -0.03em | One big metric in a proof tile |
+| `h3` | 28 / 1.2 (mobile: 22) | 500 | -0.02em | Project-row titles, case-study sub-sections |
+| `h4` | 18 / 1.4 | 600 | -0.01em | Grid card titles, timeline steps, small headings |
+| `readout` | 36 / 1 (mobile: 30), **mono** | 500 | -0.03em | One metric in a proof tile (sized so 9-char values like `1920×1080` fit 4-up) |
 | `lead` | 20 / 1.5 (mobile: 18) | 400 | -0.01em | Intro paragraphs under display/h1/h2 |
 | `body-lg` | 18 / 1.6 | 400 | -0.005em | Case-study prose, about text |
 | `body` | 16 / 1.65 | 400 | 0 | Default prose |

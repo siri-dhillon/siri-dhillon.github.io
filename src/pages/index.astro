@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Hero from '@/components/Hero.astro';
-import Services from '@/components/Services.astro';
+import ProofStrip from '@/components/ProofStrip.astro';
 import FeaturedWork from '@/components/FeaturedWork.astro';
 import CurrentWork from '@/components/CurrentWork.astro';
-import Experience from '@/components/Experience.astro';
-import Skills from '@/components/Skills.astro';
+import HowIWork from '@/components/HowIWork.astro';
 import About from '@/components/About.astro';
 import Contact from '@/components/Contact.astro';
 import { site } from '@/lib/site';
@@ -23,12 +22,12 @@ const personLd = {
 ---
 <BaseLayout>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(personLd)} />
+  <!-- Section order: DESIGN.md §8. CurrentWork renders only when site.currentWork.enabled. -->
   <Hero />
-  <Services />
+  <ProofStrip />
   <FeaturedWork />
   <CurrentWork />
-  <Experience />
-  <Skills />
+  <HowIWork />
   <About />
   <Contact />
 </BaseLayout>

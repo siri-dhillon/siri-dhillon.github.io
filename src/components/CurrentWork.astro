@@ -30,7 +30,7 @@ const flow = ['Raw radar signal', 'Onboard processing', 'ML on Trillium TPU', 'A
         {flow.map((step, i) => (
           <li class="flex items-center gap-4">
             <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line bg-surface text-sm font-semibold text-accent">{i + 1}</span>
-            <span class="flex-1 rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-ink">{step}</span>
+            <span class="flex-1 rounded-control border border-line bg-surface px-4 py-3 text-sm font-medium text-ink">{step}</span>
           </li>
         ))}
       </ol>

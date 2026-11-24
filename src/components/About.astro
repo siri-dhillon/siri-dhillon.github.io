@@ -1,26 +1,110 @@
 ---
+/**
+ * About (DESIGN.md §8): who's accountable. Photo + bio, then condensed experience,
+ * certifications and toolbox (absorbs the former Experience and Skills sections).
+ */
 import { site } from '@/lib/site';
 import { href } from '@/lib/paths';
-import { publicFileExists } from '@/lib/content';
+import { getExperience, formatYearMonth, publicFileExists } from '@/lib/content';
 import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+
 const hasPhoto = publicFileExists(site.photo);
+const hasResume = publicFileExists(site.resumeUrl);
+const experience = await getExperience();
 ---
-<section id="about" class="section border-t border-line" aria-labelledby="about-title">
-  <div class="container-page grid items-start gap-12 md:grid-cols-[minmax(0,280px)_1fr]">
-    {hasPhoto ? (
-      <img src={href(site.photo)} alt={site.photoAlt} width="480" height="640" loading="lazy" decoding="async"
-        class="aspect-[3/4] w-full max-w-[280px] rounded-2xl border border-line object-cover" />
-    ) : (
-      <div class="grid aspect-[3/4] w-full max-w-[280px] place-items-center rounded-2xl border border-dashed border-line bg-surface text-sm text-muted">
-        Photo placeholder
+<section id="about" class="section" aria-labelledby="about-title">
+  <div class="container-page">
+    <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-4" data-reveal>
+        {hasPhoto ? (
+          <img
+            src={href(site.photo)}
+            alt={site.photoAlt}
+            width="480"
+            height="640"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[3/4] w-full max-w-[320px] rounded-panel border border-line object-cover"
+          />
+        ) : (
+          <div class="grid aspect-[3/4] w-full max-w-[320px] place-items-center rounded-panel border border-dashed border-line bg-surface text-body-sm text-muted">
+            Photo placeholder
+          </div>
+        )}
+        {site.location && <p class="mt-5 font-mono text-mono-sm text-faint">{site.location}</p>}
       </div>
-    )}
-    <div>
-      <SectionHeading id="about-title" eyebrow="About" title="A bit about me" />
-      <div class="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-muted">
-        {site.bio.map((p) => <p>{p}</p>)}
+
+      <div class="lg:col-span-8">
+        <SectionHeading
+          id="about-title"
+          eyebrow="About"
+          title="Hardware to the cloud."
+          titleMuted="One engineer, accountable end to end."
+        />
+        <div class="mt-8 max-w-[62ch] space-y-5 text-body-lg text-muted" data-reveal>
+          {site.bio.map((p) => <p>{p}</p>)}
+        </div>
+        {hasResume && (
+          <p class="mt-8" data-reveal>
+            <a href={href(site.resumeUrl)} class="btn-secondary group">
+              <Icon name="file" class="h-4 w-4" /> Résumé (PDF)
+            </a>
+          </p>
+        )}
       </div>
-      {site.location && <p class="mt-6 text-sm text-muted">{site.location}</p>}
+    </div>
+
+    <div class="mt-20 grid gap-12 border-t border-line pt-16 lg:mt-28 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-7" data-reveal>
+        <h3 class="font-mono text-mono-label uppercase text-faint">Experience</h3>
+        <ol class="mt-6 divide-y divide-line">
+          {experience.map(({ data }) => (
+            <li class="grid gap-1 py-5 first:pt-0 sm:grid-cols-[10rem_1fr] sm:gap-6">
+              <p class="font-mono text-mono-sm tabular-nums text-faint">
+                <time datetime={data.start}>{formatYearMonth(data.start)}</time> –{' '}
+                {data.end === 'present' ? 'Present' : <time datetime={data.end}>{formatYearMonth(data.end)}</time>}
+              </p>
+              <div>
+                <p class="text-label text-ink">{data.role} <span class="text-muted">· {data.org}</span></p>
+                <p class="mt-1.5 text-body-sm text-muted">{data.summary}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="space-y-12 lg:col-span-5" data-reveal style="--reveal-i: 1">
+        {site.certifications.length > 0 && (
+          <div>
+            <h3 class="font-mono text-mono-label uppercase text-faint">Certifications</h3>
+            <ul class="mt-6 space-y-4">
+              {site.certifications.map((c) => (
+                <li class="flex gap-3">
+                  <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent-soft text-accent"><Icon name="check" class="h-3.5 w-3.5" /></span>
+                  <div>
+                    <p class="text-label text-ink">{c.name}</p>
+                    <p class="mt-0.5 font-mono text-mono-sm text-faint">
+                      {c.issuer} · {formatYearMonth(c.issued)}{c.expires && ` – ${formatYearMonth(c.expires)}`}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <div>
+          <h3 class="font-mono text-mono-label uppercase text-faint">Toolbox</h3>
+          <dl class="mt-6 space-y-4">
+            {site.skills.map((g) => (
+              <div>
+                <dt class="text-label text-ink">{g.group}</dt>
+                <dd class="mt-1 text-body-sm text-muted">{g.items.join(' · ')}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
     </div>
   </div>
 </section>

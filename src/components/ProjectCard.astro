@@ -10,7 +10,7 @@ const url = href(`/work/${project.id}/`);
 const titleId = `p-${project.id}`;
 ---
 <article
-  class="group relative flex h-full flex-col rounded-2xl border border-line bg-bg p-6 transition-colors hover:border-accent/60 has-[a:focus-visible]:border-accent has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring sm:p-7"
+  class="group relative flex h-full flex-col rounded-card border border-line bg-bg p-6 transition-colors hover:border-accent/60 has-[a:focus-visible]:border-accent has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring sm:p-7"
   aria-labelledby={titleId}
   data-category={d.category}
 >
@@ -26,8 +26,8 @@ const titleId = `p-${project.id}`;
     )}
   </div>
 
-  <H id={titleId} class="mt-4 text-xl font-semibold leading-snug tracking-tight text-ink">
-    <a href={url} class="after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none group-has-[a:focus-visible]:underline">
+  <H id={titleId} class="mt-4 text-h4 text-ink">
+    <a href={url} class="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none group-has-[a:focus-visible]:underline">
       {d.title}
     </a>
   </H>
@@ -37,21 +37,21 @@ const titleId = `p-${project.id}`;
   ) : (
     <dl class="mt-5 space-y-4 text-[0.95rem] leading-relaxed">
       <div>
-        <dt class="text-xs font-semibold uppercase tracking-wider text-ink">Problem</dt>
+        <dt class="font-mono text-mono-label uppercase text-faint">Problem</dt>
         <dd class="mt-1 line-clamp-3 text-muted">{d.problem}</dd>
       </div>
       <div>
-        <dt class="text-xs font-semibold uppercase tracking-wider text-ink">What I built</dt>
+        <dt class="font-mono text-mono-label uppercase text-faint">What I built</dt>
         <dd class="mt-1 line-clamp-3 text-muted">{d.solution}</dd>
       </div>
       <div>
-        <dt class="text-xs font-semibold uppercase tracking-wider text-ink">Stack</dt>
+        <dt class="font-mono text-mono-label uppercase text-faint">Stack</dt>
         <dd class="mt-2">
           <ul class="flex flex-wrap gap-2">{d.stack.slice(0, 7).map((s) => <li class="chip">{s}</li>)}</ul>
         </dd>
       </div>
       <div>
-        <dt class="text-xs font-semibold uppercase tracking-wider text-ink">Result</dt>
+        <dt class="font-mono text-mono-label uppercase text-faint">Result</dt>
         <dd class="mt-1 line-clamp-3 text-muted">{d.outcome}</dd>
       </div>
     </dl>
@@ -63,7 +63,7 @@ const titleId = `p-${project.id}`;
     </ul>
   )}
 
-  <p class="mt-auto pt-6 text-sm font-semibold text-accent" aria-hidden="true">
-    Read case study <Icon name="arrowRight" class="inline h-4 w-4 transition-transform group-hover:translate-x-1" />
+  <p class="mt-auto pt-6 text-label text-accent" aria-hidden="true">
+    Read Case Study <Icon name="arrowRight" class="inline h-4 w-4 transition-transform group-hover:translate-x-1" />
   </p>
 </article>

@@ -13,6 +13,15 @@ const siteSchema = z.object({
   intro: z.string().min(1),
   location: z.string().default(''),
   availability: z.string().default(''),
+  /** Home hero: two-tone statement (ink + muted). See DESIGN.md §6 Hero. */
+  hero: z.object({ statement: z.string().min(1), statementMuted: z.string().default('') }),
+  /** Proof strip readouts. Real, published numbers only; href points to the source. */
+  proof: z
+    .array(z.object({ value: z.string().min(1), caption: z.string().min(1), source: z.string().min(1), href: z.string().min(1) }))
+    .max(4)
+    .default([]),
+  /** "How I work" engagement timeline. */
+  process: z.array(z.object({ when: z.string().min(1), title: z.string().min(1), text: z.string().min(1) })).default([]),
   bio: z.array(z.string()).min(1),
   photo: z.string().default(''),
   photoAlt: z.string().default(''),
@@ -55,6 +64,7 @@ const siteSchema = z.object({
     .default([]),
   contact: z.object({
     heading: z.string(),
+    headingMuted: z.string().default(''),
     intro: z.string(),
     form: z.object({
       provider: z.enum(['formspree', 'web3forms', 'getform', 'custom']),

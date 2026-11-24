@@ -1,27 +1,31 @@
 ---
+/** Hero (DESIGN.md §6): one centered two-tone statement owns the first screen. The dock is the primary CTA. */
 import { site } from '@/lib/site';
 import { href } from '@/lib/paths';
 import Icon from './Icon.astro';
+const { statement, statementMuted } = site.hero;
 ---
-<section class="relative overflow-hidden" aria-labelledby="hero-title">
-  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(60rem_30rem_at_80%_-10%,var(--accent-soft),transparent_70%)]"></div>
-  <div class="container-page pb-20 pt-20 sm:pb-28 sm:pt-28">
+<section class="relative -mt-18 flex min-h-[88svh] items-center overflow-hidden pt-18" aria-labelledby="hero-title">
+  <!-- Faint dot grid (≤4% ink), masked to fade out. Decorative. -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.04] [background-image:radial-gradient(var(--text)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
+  ></div>
+  <div class="container-page py-24 text-center">
     {site.availability && (
-      <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-sm text-muted">
-        <span class="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
-        {site.availability}
+      <p class="mx-auto max-w-[34rem] text-body-sm text-muted" data-reveal>
+        <span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" aria-hidden="true"></span>{site.availability}
       </p>
     )}
-    <h1 id="hero-title" class="mt-6 text-4xl font-bold tracking-tight text-ink sm:text-6xl">
-      {site.name}
+    <p class="mt-8 font-mono text-mono-label uppercase text-faint" data-reveal>{site.name} · Systems &amp; AI engineer</p>
+    <h1 id="hero-title" class="mx-auto mt-5 max-w-[16ch] text-display text-ink" data-reveal style="--reveal-i: 1">
+      {statement}{statementMuted && <> <span class="tone-muted">{statementMuted}</span></>}
     </h1>
-    <p class="mt-5 max-w-3xl text-2xl font-medium leading-snug tracking-tight text-ink/90 sm:text-3xl">
-      {site.headline}
-    </p>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{site.intro}</p>
-    <div class="mt-10 flex flex-wrap gap-3">
-      <a href={href('/#work')} class="btn-primary">View work <Icon name="arrowRight" class="h-4 w-4" /></a>
-      <a href={href('/#contact')} class="btn-secondary">Work with me</a>
+    <p class="mx-auto mt-8 max-w-[38rem] text-lead text-muted" data-reveal style="--reveal-i: 2">{site.intro}</p>
+    <div class="mt-12" data-reveal style="--reveal-i: 2">
+      <a href={href('/#work')} class="btn-secondary group">
+        See the Work <Icon name="arrowRight" class="h-4 w-4 rotate-90" />
+      </a>
     </div>
   </div>
 </section>

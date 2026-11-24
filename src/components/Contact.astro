@@ -15,36 +15,29 @@ if (site.resumeUrl && !hasResume) console.warn(`[contact] ${site.resumeUrl} not 
 
 const sideLinks = [
   site.bookingUrl && { label: 'Book a call', url: site.bookingUrl, icon: 'calendar' as const, external: true },
-  hasResume && { label: 'Resume (PDF)', url: href(site.resumeUrl), icon: 'file' as const, external: false },
+  hasResume && { label: 'Résumé (PDF)', url: href(site.resumeUrl), icon: 'file' as const, external: false },
   site.socials.linkedin && { label: 'LinkedIn', url: site.socials.linkedin, icon: 'linkedin' as const, external: true },
   site.socials.github && { label: 'GitHub', url: site.socials.github, icon: 'github' as const, external: true },
   site.email && { label: site.email, url: `mailto:${site.email}`, icon: 'mail' as const, external: false },
 ].filter(Boolean) as { label: string; url: string; icon: 'calendar' | 'file' | 'linkedin' | 'github' | 'mail'; external: boolean }[];
 ---
-<section id="contact" class="section border-t border-line bg-surface/50" aria-labelledby="contact-title">
-  <div class="container-page grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-    <div>
-      <SectionHeading id="contact-title" eyebrow="Contact" title={site.contact.heading} lead={site.contact.intro} />
-      <ul class="mt-8 space-y-3">
-        {sideLinks.map((l) => (
-          <li>
-            <a href={l.url} class="group inline-flex items-center gap-3 font-medium text-ink hover:text-accent"
-              {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-              <span class="grid h-10 w-10 place-items-center rounded-xl border border-line bg-bg text-muted group-hover:text-accent"><Icon name={l.icon} /></span>
-              {l.label}
-              {l.external && <span class="sr-only">(opens in a new tab)</span>}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
+<section id="inquire" class="band-inverse section" aria-labelledby="inquire-title">
+  <div class="container-page">
+    <SectionHeading
+      id="inquire-title"
+      eyebrow="Inquire"
+      title={site.contact.heading}
+      titleMuted={site.contact.headingMuted}
+      lead={site.contact.intro}
+      align="center"
+    />
 
-    <div class="card bg-bg">
+    <div id="inquire-form" class="mx-auto mt-14 max-w-[40rem] rounded-card border border-line bg-surface p-6 shadow-raised sm:p-10" data-reveal>
       <form
         action={form.endpoint}
         method="POST"
         accept-charset="UTF-8"
-        class="grid gap-5 sm:grid-cols-2"
+        class="grid gap-6 sm:grid-cols-2"
         data-inquiry-form
         data-honeypot={setup.honeypot}
         aria-describedby={configured ? undefined : 'form-config-note'}
@@ -92,26 +85,41 @@ const sideLinks = [
             placeholder="e.g. An internal doc search for our support team…"></textarea>
         </div>
 
-        <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-          <p class="text-sm text-muted"><span aria-hidden="true">*</span> Required</p>
-          <button type="submit" class="btn-primary" disabled={!configured}>
-            <span data-label>Send inquiry</span> <Icon name="arrowRight" class="h-4 w-4" />
+        <div class="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-body-sm text-muted"><span aria-hidden="true">*</span> Required</p>
+          <button type="submit" class="btn-primary group" disabled={!configured}>
+            <span data-label>Send Inquiry</span> <Icon name="arrowRight" class="nudge h-4 w-4" />
           </button>
         </div>
         {!configured && (
-          <p id="form-config-note" class="rounded-xl border border-dashed border-line p-3 text-sm text-muted sm:col-span-2">
+          <p id="form-config-note" class="rounded-control border border-dashed border-line p-3 text-body-sm text-muted sm:col-span-2">
             The inquiry form isn't connected yet. Please reach out on LinkedIn in the meantime.
           </p>
         )}
-        <p data-error role="alert" class="hidden rounded-xl border border-red-300 bg-red-50 p-3 text-sm text-red-800 sm:col-span-2 dark:border-red-900 dark:bg-red-950 dark:text-red-200"></p>
+        <p data-error role="alert" class="hidden rounded-control border border-danger/40 bg-danger-soft p-3 text-body-sm text-danger sm:col-span-2"></p>
       </form>
 
       <div data-success class="hidden py-8 text-center" tabindex="-1" role="status">
         <span class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent-soft text-accent"><Icon name="check" class="h-6 w-6" /></span>
-        <h3 class="mt-4 text-xl font-semibold text-ink">Thanks, your message is on its way.</h3>
+        <h3 class="mt-4 text-h4 text-ink">Thanks, your message is on its way.</h3>
         <p class="mt-2 text-muted">I'll get back to you within 2 business days.</p>
       </div>
     </div>
+
+    {sideLinks.length > 0 && (
+      <ul class="mx-auto mt-10 flex max-w-[40rem] flex-wrap justify-center gap-x-6 gap-y-3" aria-label="Other ways to reach me">
+        {sideLinks.map((l) => (
+          <li>
+            <a href={l.url} class="group inline-flex min-h-11 items-center gap-2 text-label text-muted transition-colors hover:text-ink"
+              {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+              <Icon name={l.icon} class="h-4 w-4" />
+              {l.label}
+              {l.external && <span class="sr-only">(opens in a new tab)</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 </section>
 
@@ -159,7 +167,7 @@ const sideLinks = [
         console.error('[contact]', err);
       } finally {
         button.disabled = false;
-        label.textContent = 'Send inquiry';
+        label.textContent = 'Send Inquiry';
       }
     });
   }

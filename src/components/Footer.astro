@@ -1,14 +1,21 @@
 ---
+/** Footer (DESIGN.md §6): compact inverse band; extra bottom space keeps it clear of the Inquire dock. */
 import { site } from '@/lib/site';
 import { href } from '@/lib/paths';
+import { publicFileExists } from '@/lib/content';
 import SocialLinks from './SocialLinks.astro';
 const year = new Date().getFullYear();
+const hasResume = publicFileExists(site.resumeUrl);
 ---
-<footer class="border-t border-line">
-  <div class="container-page flex flex-col items-start justify-between gap-6 py-10 sm:flex-row sm:items-center">
+<footer class="band-inverse dark:border-t-0">
+  <div class="container-page flex flex-col items-start justify-between gap-8 pb-32 pt-12 sm:flex-row sm:items-center">
     <div>
-      <p class="font-semibold text-ink">{site.name}</p>
-      <p class="mt-1 text-sm text-muted">© {year} · Built with Astro · <a class="link" href={href('/work/')}>All work</a></p>
+      <p class="text-label text-ink">{site.name}</p>
+      <p class="mt-1 text-body-sm text-muted">Systems &amp; AI engineer</p>
+      <p class="mt-4 font-mono text-mono-sm text-faint">
+        © {year} · <a class="link !text-muted hover:!text-ink" href={href('/work/')}>All work</a>
+        {hasResume && <> · <a class="link !text-muted hover:!text-ink" href={href(site.resumeUrl)}>Résumé</a></>}
+      </p>
     </div>
     <SocialLinks />
   </div>
