@@ -64,6 +64,11 @@ const projects = defineCollection({
         .optional()
         .default({ repo: undefined, demo: undefined }),
       confidential: z.boolean().default(false),
+      /** Headline readouts for the case-study page (DESIGN.md §6). Published, verifiable numbers only. */
+      metrics: z
+        .array(z.object({ value: z.string().trim().min(1), caption: z.string().trim().min(1) }))
+        .max(4, 'at most 4 metrics')
+        .default([]),
       /** Bullets for the generated resume (npm run resume). Empty = not on the resume. */
       resumeBullets: z.array(z.string().trim().min(1)).default([]),
       draft: z.boolean().default(false),

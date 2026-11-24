@@ -12,6 +12,11 @@ stack: [Python, Claude API, Qdrant, FastAPI, Streamlit, MCP, BM25 + dense retrie
 outcome: "On a 51-question golden set: passage-level Recall@5 rose from 0.87 to 0.96 with reranking, and end-to-end scores were 1.00 faithfulness, 0.99 citation accuracy, 45/45 answerable questions answered, and 6/6 out-of-scope questions refused, at about $0.0003 per query. CI fails any pull request that drops a metric below its threshold, and authenticates with OIDC instead of a stored API key."
 featured: true
 order: 0
+metrics:
+  - { value: "0.99", caption: "Citation accuracy" }
+  - { value: "1.00", caption: "Faithfulness" }
+  - { value: "0.87 → 0.96", caption: "Recall@5 with reranking" }
+  - { value: "$0.0003", caption: "Per query" }
 cover: /images/projects/ask-my-docs-ui.webp
 coverAlt: "Ask My Docs interface showing a cited answer about Kubernetes Jobs, with validated citations, confidence score, latency, and the retrieved document chunks"
 links:

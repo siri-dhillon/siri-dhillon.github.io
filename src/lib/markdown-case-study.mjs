@@ -3,7 +3,8 @@
  *
  * 1. Demotes headings one level: the body renders under the page's
  *    "Deep dive" <h2>, so authored `##` must become <h3> to keep the outline valid.
- * 2. Adds intrinsic width/height (read from the file in /public), plus
+ * 2. Makes tables keyboard-focusable (they scroll horizontally on small screens).
+ * 3. Adds intrinsic width/height (read from the file in /public), plus
  *    loading="lazy" and decoding="async", to local images to prevent layout shift.
  */
 import { join } from 'node:path';
@@ -28,6 +29,13 @@ export const caseStudyHast = {
       filter: ['h1', 'h2', 'h3', 'h4', 'h5'],
       visit(node, ctx) {
         ctx.setField(node, 'tagName', `h${Number(node.tagName[1]) + 1}`);
+      },
+    },
+    {
+      // Tables scroll horizontally on narrow screens; make that region keyboard-reachable.
+      filter: ['table'],
+      visit(node, ctx) {
+        if (node.properties?.tabIndex == null) ctx.setProperty(node, 'tabIndex', 0);
       },
     },
     {

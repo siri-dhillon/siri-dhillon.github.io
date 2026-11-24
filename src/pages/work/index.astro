@@ -9,22 +9,24 @@ const counts = Object.fromEntries(PROJECT_CATEGORIES.map((c) => [c, projects.fil
 const categories = PROJECT_CATEGORIES.filter((c) => counts[c] > 0);
 ---
 <BaseLayout title="Work" description="Projects by Sirpreet Dhillon across AI/LLM, full-stack, data, cloud architecture, and edge systems.">
-  <section class="container-page pb-24 pt-16 sm:pt-24" aria-labelledby="work-title">
-    <p class="eyebrow">Work</p>
-    <h1 id="work-title" class="mt-4 text-h1 text-ink">All projects</h1>
-    <p class="lead">AI, full-stack, data, and systems projects, from LLM agents and web apps to FPGA hardware and network simulation. Client work is anonymized.</p>
+  <section class="container-page pb-24 pt-20 lg:pb-40 lg:pt-32" aria-labelledby="work-title">
+    <div class="max-w-3xl" data-reveal>
+      <p class="eyebrow">Work</p>
+      <h1 id="work-title" class="mt-4 text-h1 text-ink">All projects. <span class="tone-muted">Problem, build and result for each.</span></h1>
+      <p class="lead">AI, full-stack, data, and systems projects, from LLM agents and web apps to FPGA hardware and network simulation. Client work is anonymized.</p>
+    </div>
 
-    <div class="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category" data-filters>
-      <button type="button" class="filter-btn" aria-pressed="true" data-filter="all">All <span class="text-muted">({projects.length})</span></button>
+    <div class="mt-14 flex flex-wrap gap-2" role="group" aria-label="Filter projects by category" data-filters data-reveal>
+      <button type="button" class="filter-btn" aria-pressed="true" data-filter="all">All <span class="count">{projects.length}</span></button>
       {categories.map((c) => (
-        <button type="button" class="filter-btn" aria-pressed="false" data-filter={c}>{c} <span class="text-muted">({counts[c]})</span></button>
+        <button type="button" class="filter-btn" aria-pressed="false" data-filter={c}>{c} <span class="count">{counts[c]}</span></button>
       ))}
     </div>
     <p class="sr-only" aria-live="polite" data-filter-status></p>
 
-    <ul class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-project-list>
-      {projects.map((p) => (
-        <li data-category={p.data.category}><ProjectCard project={p} headingLevel="h2" /></li>
+    <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" data-project-list>
+      {projects.map((p, i) => (
+        <li data-category={p.data.category} data-reveal style={`--reveal-i: ${i % 3}`}><ProjectCard project={p} headingLevel="h2" /></li>
       ))}
     </ul>
   </section>
@@ -33,12 +35,13 @@ const categories = PROJECT_CATEGORIES.filter((c) => counts[c] > 0);
 <style>
   @reference "../../styles/global.css";
   .filter-btn {
-    @apply rounded-full border border-line bg-bg px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-surface-2;
+    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-line-strong px-4 text-label text-ink transition-colors hover:bg-surface-2;
   }
   .filter-btn[aria-pressed='true'] {
-    @apply border-accent bg-accent text-accent-fg;
+    @apply border-accent bg-accent text-accent-fg hover:bg-accent-hover;
   }
-  .filter-btn[aria-pressed='true'] span { @apply text-accent-fg/80; }
+  .count { @apply font-mono text-mono-sm tabular-nums text-faint; }
+  .filter-btn[aria-pressed='true'] .count { @apply text-accent-fg; }
 </style>
 
 <script>

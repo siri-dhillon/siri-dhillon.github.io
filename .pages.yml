@@ -107,6 +107,17 @@ content:
         label: Draft (hidden from the live site)
         type: boolean
         default: false
+      - name: metrics
+        label: Headline metrics (optional, max 4; real numbers from the outcome)
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Value (e.g. 0.99)
+            type: string
+          - name: caption
+            label: Caption (e.g. Citation accuracy)
+            type: string
       - name: resumeBullets
         label: Resume bullets (leave empty to keep off the resume)
         type: string

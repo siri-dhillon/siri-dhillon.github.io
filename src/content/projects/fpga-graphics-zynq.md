@@ -10,6 +10,8 @@ problem: Getting smooth, tear-free graphics and a playable game out of a ZedBoar
 solution: A VGA display core that keeps its frame buffers in Zedboard DDR memory and switches between two buffers (double buffering) to avoid screen tearing. On top of that, Atari's Missile Command re-implemented with custom VHDL hardware blocks and a MicroBlaze soft processor. Related work includes PWM and audio controllers, a hardware square-root accelerator, and a custom Vivado IP repository.
 stack: [VHDL, C, Xilinx Vivado, Zynq-7000, MicroBlaze, AXI, VGA, DDR]
 outcome: The VGA core displays up to 1920×1080 without tearing, and the game runs on custom hardware blocks.
+metrics:
+  - { value: "1920×1080", caption: "Tear-free VGA output" }
 featured: false
 order: 6
 links:

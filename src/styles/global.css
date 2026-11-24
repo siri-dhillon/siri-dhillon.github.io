@@ -251,4 +251,11 @@
   .prose-content pre code { @apply bg-transparent p-0; }
   .prose-content img { @apply mx-auto h-auto max-h-[36rem] w-auto max-w-full rounded-panel border border-line object-contain; }
   .prose-content blockquote { @apply border-l-2 border-accent pl-4 italic; }
+  /* Tables: scroll horizontally on narrow screens instead of crushing columns. */
+  .prose-content table { @apply block w-max max-w-full overflow-x-auto border-collapse text-body-sm tabular-nums; }
+  .prose-content th { @apply border-b border-line-strong px-4 py-2.5 text-left font-mono text-mono-label whitespace-nowrap uppercase text-faint; }
+  .prose-content td { @apply border-b border-line px-4 py-2.5 whitespace-nowrap text-muted; }
+  .prose-content th:first-child, .prose-content td:first-child { @apply pl-0; }
+  .prose-content tr:last-child td { @apply border-b-0; }
+  .prose-content td strong { @apply text-ink; }
 }

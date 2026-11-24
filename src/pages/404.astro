@@ -1,15 +1,18 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { href } from '@/lib/paths';
+import Icon from '@/components/Icon.astro';
 ---
 <BaseLayout title="Page not found" noindex>
-  <section class="container-page py-32 text-center">
-    <p class="eyebrow">404</p>
-    <h1 class="mt-4 text-h1 text-ink">This page doesn't exist</h1>
-    <p class="mx-auto mt-4 max-w-md text-muted">It may have moved. Try the homepage or the project list.</p>
-    <div class="mt-8 flex justify-center gap-3">
-      <a href={href('/')} class="btn-primary">Home</a>
-      <a href={href('/work/')} class="btn-secondary">All work</a>
+  <section class="container-page flex min-h-[70svh] flex-col items-center justify-center py-24 text-center">
+    <p class="font-mono text-mono-label uppercase text-faint">Error 404</p>
+    <h1 class="mt-5 max-w-[18ch] text-h1 text-ink">
+      This page doesn’t exist. <span class="tone-muted">It may have moved.</span>
+    </h1>
+    <p class="mt-6 max-w-md text-lead text-muted">Try the homepage or the project list.</p>
+    <div class="mt-12 flex flex-wrap justify-center gap-3">
+      <a href={href('/')} class="btn-secondary group"><Icon name="arrowLeft" class="h-4 w-4" /> Home</a>
+      <a href={href('/work/')} class="btn-secondary group">All Work <Icon name="arrowRight" class="nudge h-4 w-4" /></a>
     </div>
   </section>
 </BaseLayout>
