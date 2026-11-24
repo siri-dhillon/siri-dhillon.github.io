@@ -430,28 +430,37 @@ Six sections, each one idea, with polarity changes at the key moments:
 The Inquire dock is present on every screen; it hides only while section 6's form is
 visible.
 
-**Proof readouts (all from published case studies):**
+**Proof readouts (confirmed 2026-11-24).** Every tile links to its source:
 
-| Readout | Caption | Source |
+| Readout | Caption | Links to |
 |---|---|---|
-| `0.99` | Citation accuracy | Ask My Docs |
-| `0.87 → 0.96` | Recall@5 with reranking | Ask My Docs |
-| `6/6` | Out-of-scope questions refused | Ask My Docs |
-| `2` | AWS + CompTIA Security+ certifications | Skills & certifications |
+| `0.99` | Citation accuracy | `/work/ask-my-docs/` |
+| `$0.0003` | Per query | `/work/ask-my-docs/` |
+| `1920×1080` | Tear-free FPGA video | `/work/fpga-graphics-zynq/` |
+| `AWS + Security+` | Certified | About → certifications (`#about`) |
 
-Replace or rotate these as new case studies add numbers; three of four from one
-project is acceptable at launch but should diversify.
+Rotate tiles as new case studies publish numbers. The orbital SAR result
+(2.65 m vs 2.66 m theoretical range resolution) can replace the FPGA tile once that
+project is public.
 
-**How I work (draft steps, to be confirmed against real practice):**
+**How I work (confirmed 2026-11-24, prototype-first):**
 
-1. **Day 0: Message.** You describe the problem in a few lines; I reply within 2
-   business days.
-2. **Week 1: Scope.** A call and a written one-page plan: goal, constraints, success
-   measure, timeline.
-3. **Weeks 1–2: Prototype.** A working slice on real data, so decisions are made on
-   something you can use.
-4. **Build.** Production engineering with tests, evaluation and weekly demos.
-5. **Handover.** Docs, runbooks and a walkthrough, so your team owns it.
+1. **Day 0: Message.** A few lines about the problem. I reply within 2 business days.
+2. **Week 1: Scope.** A call and a one-page plan: goal, constraints, success measure.
+3. **Weeks 1–2: Prototype.** A working slice on real data.
+4. **Ongoing: Build.** Production code, tests, evals and weekly demos.
+5. **End: Handover.** Docs, runbooks and a walkthrough. Your team owns it.
+
+**Inquire copy (confirmed 2026-11-24):**
+
+- Heading (two-tone `h2`): "Tell me what you're building. *One short message is
+  enough to start.*"
+- Lead: "Hiring for an AI or forward deployed role, or have a project in mind? I
+  reply within 2 business days."
+
+**Orbital SAR / Trillium TPU:** stays hidden (`draft: true`) until milestones M2/M2b
+are done. The design has no slot for it until then; restoring it later adds a
+"Now building" band between Selected work and How I work.
 
 ## 9. Don'ts
 
