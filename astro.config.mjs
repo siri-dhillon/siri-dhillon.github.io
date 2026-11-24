@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { satteri } from '@astrojs/markdown-satteri';
+import { caseStudyHast } from './src/lib/markdown-case-study.mjs';
 
 /**
  * Host-agnostic deploy settings.
@@ -24,5 +26,6 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: { format: 'directory' },
   integrations: [sitemap()],
+  markdown: { processor: satteri({ hastPlugins: [caseStudyHast] }) },
   vite: { plugins: [tailwindcss()] },
 });

@@ -20,13 +20,19 @@ const props = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <SEO {...props} />
-    <!-- Apply saved / system theme before first paint to avoid a flash. -->
+    <!-- Apply saved / system theme before first paint to avoid a flash; keep theme-color in sync. -->
     <script is:inline>
       (function () {
         try {
           var s = localStorage.getItem('theme');
           var dark = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
           document.documentElement.classList.toggle('dark', dark);
+          if (s) {
+            document.querySelectorAll('meta[data-theme-color]').forEach(function (m) {
+              m.removeAttribute('media');
+              m.setAttribute('content', dark ? '#0a0e17' : '#ffffff');
+            });
+          }
         } catch (e) {}
       })();
     </script>

@@ -44,9 +44,9 @@ export function publicFileExists(path: string): boolean {
   return existsSync(join(process.cwd(), 'public', path));
 }
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const yearMonth = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric', timeZone: 'UTC' });
 export function formatYearMonth(ym: string): string {
   if (ym === 'present') return 'Present';
-  const [y, m] = ym.split('-');
-  return `${MONTHS[Number(m) - 1]} ${y}`;
+  const [y, m] = ym.split('-').map(Number);
+  return yearMonth.format(Date.UTC(y, m - 1));
 }

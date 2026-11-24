@@ -10,7 +10,7 @@ const url = href(`/work/${project.id}/`);
 const titleId = `p-${project.id}`;
 ---
 <article
-  class="group relative flex h-full flex-col rounded-2xl border border-line bg-bg p-6 transition-colors hover:border-accent/60 sm:p-7"
+  class="group relative flex h-full flex-col rounded-2xl border border-line bg-bg p-6 transition-colors hover:border-accent/60 has-[a:focus-visible]:border-accent has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-ring sm:p-7"
   aria-labelledby={titleId}
   data-category={d.category}
 >

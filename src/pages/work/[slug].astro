@@ -6,6 +6,7 @@ import Icon from '@/components/Icon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { getProjects, publicDetails, type Project } from '@/lib/content';
 import { href } from '@/lib/paths';
+import { publicImageSize } from '@/lib/markdown-case-study.mjs';
 
 export const getStaticPaths = (async () => {
   const projects = await getProjects();
@@ -20,6 +21,7 @@ const { project, next } = Astro.props;
 const d = project.data;
 const { links, cover, coverAlt } = publicDetails(project);
 const { Content } = await render(project);
+const coverSize = cover ? await publicImageSize(cover) : undefined;
 const hasBody = Boolean(project.body?.replace(/<!--[\s\S]*?-->/g, '').trim());
 
 const facts = [
@@ -58,7 +60,8 @@ const sections = [
     </header>
 
     {cover && (
-      <img src={href(cover)} alt={coverAlt} class="mt-12 w-full rounded-2xl border border-line object-cover" loading="eager" decoding="async" />
+      <img src={href(cover)} alt={coverAlt} width={coverSize?.width} height={coverSize?.height}
+        class="mt-12 h-auto w-full rounded-2xl border border-line object-cover" loading="eager" fetchpriority="high" decoding="async" />
     )}
 
     <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_280px]">

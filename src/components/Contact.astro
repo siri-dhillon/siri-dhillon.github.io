@@ -63,7 +63,7 @@ const sideLinks = [
         </div>
         <div>
           <label for="f-email" class="label">Email <span class="text-muted" aria-hidden="true">*</span></label>
-          <input id="f-email" name={setup.emailField} type="email" required autocomplete="email" class="field" />
+          <input id="f-email" name={setup.emailField} type="email" required autocomplete="email" spellcheck="false" class="field" />
         </div>
         <div>
           <label for="f-type" class="label">Project type <span class="text-muted" aria-hidden="true">*</span></label>
@@ -89,7 +89,7 @@ const sideLinks = [
         <div class="sm:col-span-2">
           <label for="f-message" class="label">Message <span class="text-muted" aria-hidden="true">*</span></label>
           <textarea id="f-message" name="message" rows="5" required minlength="10" class="field resize-y"
-            placeholder="What are you trying to build or solve?"></textarea>
+            placeholder="e.g. An internal doc search for our support team…"></textarea>
         </div>
 
         <div class="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
@@ -109,7 +109,7 @@ const sideLinks = [
       <div data-success class="hidden py-8 text-center" tabindex="-1" role="status">
         <span class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent-soft text-accent"><Icon name="check" class="h-6 w-6" /></span>
         <h3 class="mt-4 text-xl font-semibold text-ink">Thanks, your message is on its way.</h3>
-        <p class="mt-2 text-muted">I'll get back to you within two business days.</p>
+        <p class="mt-2 text-muted">I'll get back to you within 2 business days.</p>
       </div>
     </div>
   </div>
@@ -124,7 +124,13 @@ const sideLinks = [
     const label = button.querySelector<HTMLElement>('[data-label]')!;
     const honeypot = form.dataset.honeypot || '_gotcha';
 
+    // Warn before leaving with a half-written message.
+    let dirty = false;
+    form.addEventListener('input', () => { dirty = true; });
+    window.addEventListener('beforeunload', (e) => { if (dirty) e.preventDefault(); });
+
     const showSuccess = () => {
+      dirty = false;
       form.classList.add('hidden');
       success.classList.remove('hidden');
       success.focus();

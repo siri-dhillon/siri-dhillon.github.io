@@ -16,11 +16,19 @@ import Icon from './Icon.astro';
     const dark = document.documentElement.classList.contains('dark');
     document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-pressed', String(dark)));
   }
+  function syncThemeColor() {
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+    document.querySelectorAll<HTMLMetaElement>('meta[data-theme-color]').forEach((m) => {
+      m.removeAttribute('media');
+      m.content = bg;
+    });
+  }
   document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) =>
     btn.addEventListener('click', () => {
       const dark = document.documentElement.classList.toggle('dark');
       try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
       sync();
+      syncThemeColor();
     }),
   );
   sync();
